@@ -1,0 +1,250 @@
+.container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 120rpx;
+}
+
+.status-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50rpx 30rpx;
+  color: #fff;
+}
+
+.status-0 {
+  background: linear-gradient(135deg, #FFB800 0%, #FF9500 100%);
+}
+
+.status-1 {
+  background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);
+}
+
+.status-2 {
+  background: linear-gradient(135deg, #52C41A 0%, #389E0D 100%);
+}
+
+.status-3 {
+  background: linear-gradient(135deg, #52C41A 0%, #389E0D 100%);
+}
+
+.status-4 {
+  background: linear-gradient(135deg, #999 0%, #666 100%);
+}
+
+.status-icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.status-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.status-desc {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.service-card, .contact-card, .order-card, .timeline-section {
+  background: #fff;
+  margin: 20rpx 30rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 24rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.service-info, .contact-info, .order-info {
+  padding: 10rpx 30rpx 20rpx;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+}
+
+.info-label {
+  font-size: 32rpx;
+  color: #999;
+}
+
+.info-value {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.info-value.price {
+  color: #FF6B6B;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.info-value.phone {
+  color: #4A90D9;
+}
+
+.info-value-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.copy-btn {
+  font-size: 28rpx;
+  color: #4A90D9;
+  padding: 4rpx 16rpx;
+  border: 1rpx solid #4A90D9;
+  border-radius: 8rpx;
+  margin-left: 16rpx;
+}
+
+.timeline-section {
+  padding-bottom: 20rpx;
+}
+
+.timeline-list {
+  padding: 20rpx 30rpx 0;
+}
+
+.timeline-item {
+  display: flex;
+  padding-bottom: 30rpx;
+  position: relative;
+}
+
+.timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 11rpx;
+  top: 32rpx;
+  bottom: 0;
+  width: 2rpx;
+  background: #e5e5e5;
+}
+
+.timeline-item.active .timeline-dot {
+  background: #4A90D9;
+  border-color: #4A90D9;
+}
+
+.timeline-item.active::before {
+  background: #4A90D9;
+}
+
+.timeline-dot {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background: #fff;
+  border: 4rpx solid #e5e5e5;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  margin-top: 4rpx;
+}
+
+.timeline-content {
+  flex: 1;
+}
+
+.timeline-title {
+  font-size: 32rpx;
+  color: #333;
+  display: block;
+}
+
+.timeline-time {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 4rpx;
+  display: block;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background: #fff;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  gap: 20rpx;
+}
+
+.cancel-btn, .confirm-btn, .contact-btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 30rpx;
+  border-radius: 44rpx;
+}
+
+.cancel-btn {
+  background: #fff;
+  border: 2rpx solid #ff4d4f;
+  color: #ff4d4f;
+}
+
+.pay-btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 30rpx;
+  border-radius: 44rpx;
+  background: linear-gradient(135deg, #07c160 0%, #059e4f 100%);
+  color: #fff;
+}
+
+.pay-btn::after {
+  border: none;
+}
+
+.confirm-btn {
+  background: linear-gradient(135deg, #52C41A 0%, #389E0D 100%);
+  color: #fff;
+}
+
+.contact-btn {
+  background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);
+  color: #fff;
+}
+
+.cancel-btn::after, .confirm-btn::after, .contact-btn::after {
+  border: none;
+}
+
+/* 支付状态卡片 */
+.pay-status-card {
+  background: #fff;
+  margin: 20rpx 30rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.pay-status-info {
+  padding: 10rpx 30rpx 20rpx;
+}
+
+.info-value.paid {
+  color: #07c160;
+  font-weight: bold;
+}
+
+.info-value.unpaid {
+  color: #ff4d4f;
+}

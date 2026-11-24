@@ -1,0 +1,121 @@
+<view class="container">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="header-top">
+        <view class="welcome">
+          <text class="greeting">{{userInfo.name ? '您好，' + userInfo.name : '欢迎使用智慧养老'}}</text>
+          <text class="sub-greeting">愿您今天心情愉快</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="banner-wrapper">
+    <swiper class="banner" indicator-dots="{{false}}" autoplay circular bindchange="onBannerChange">
+      <swiper-item wx:for="{{bannerList}}" wx:key="id">
+        <view class="banner-item" style="background: {{item.color}}">
+          <view class="banner-content">
+            <text class="banner-title">{{item.title}}</text>
+            <text class="banner-desc">{{item.desc}}</text>
+          </view>
+          <view class="banner-decoration"></view>
+        </view>
+      </swiper-item>
+    </swiper>
+    <view class="banner-dots">
+      <view class="dot {{currentBanner === index ? 'active' : ''}}" wx:for="{{bannerList}}" wx:key="id"></view>
+    </view>
+  </view>
+
+  <view class="emergency-section">
+    <view class="emergency-btn" bindtap="goToEmergency">
+      <view class="pulse-ring"></view>
+      <view class="pulse-ring delay"></view>
+      <view class="emergency-content">
+        <view class="emergency-icon-text">SOS</view>
+        <text class="emergency-text">一键呼救</text>
+      </view>
+    </view>
+    <view class="emergency-desc">
+      <text>紧急情况，点击立即求助</text>
+    </view>
+  </view>
+
+  <view class="function-section">
+    <view class="section-header">
+      <text class="section-title">便捷服务</text>
+    </view>
+    <view class="function-grid">
+      <view class="function-item" wx:for="{{functionList}}" wx:key="id" bindtap="goToFunction" data-url="{{item.url}}">
+        <view class="function-icon" style="background: {{item.color}}">
+          <text class="icon-letter">{{item.iconText}}</text>
+        </view>
+        <view class="function-info">
+          <text class="function-name">{{item.name}}</text>
+          <text class="function-desc">{{item.desc}}</text>
+        </view>
+        <view class="function-arrow"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weather-section">
+    <view class="weather-card" bindtap="goToWeather">
+      <view class="weather-left">
+        <view class="weather-icon-wrap">
+          <text class="weather-icon-big">{{weather.icon}}</text>
+        </view>
+        <view class="weather-detail">
+          <text class="weather-temp-big">{{weather.temp}}°C</text>
+          <text class="weather-status">{{weather.weather}}</text>
+        </view>
+      </view>
+      <view class="weather-right">
+        <view class="weather-item">
+          <text class="weather-label">城市</text>
+          <text class="weather-value">{{weather.city}}</text>
+        </view>
+        <view class="weather-item">
+          <text class="weather-label">湿度</text>
+          <text class="weather-value">{{weather.humidity}}%</text>
+        </view>
+        <view class="weather-item">
+          <text class="weather-label">风力</text>
+          <text class="weather-value">{{weather.wind}}</text>
+        </view>
+      </view>
+      <view class="weather-arrow"></view>
+    </view>
+    <view class="city-switch" bindtap="refreshLocation">
+      <view class="switch-icon-wrap">
+        <text class="switch-icon-text">定位</text>
+      </view>
+      <text class="switch-text">刷新位置</text>
+    </view>
+  </view>
+
+  <view class="section news-section">
+    <view class="section-header">
+      <text class="section-title">养老新闻</text>
+      <text class="section-more" bindtap="goToFunction" data-url="/pages/news/news">查看全部 <text class="more-arrow"></text></text>
+    </view>
+    <view class="news-list">
+      <view class="news-item" wx:for="{{hotNews}}" wx:key="id" bindtap="goToNews" data-id="{{item.id}}">
+        <view class="news-content">
+          <text class="news-title">{{item.title}}</text>
+          <text class="news-summary">{{item.summary}}</text>
+          <view class="news-meta">
+            <text class="news-time">{{item.createTime}}</text>
+            <text class="news-views">阅读 {{item.readCount}}</text>
+          </view>
+        </view>
+        <view class="news-tag">新闻</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text class="footer-text">智慧养老服务热线：12349</text>
+  </view>
+</view>

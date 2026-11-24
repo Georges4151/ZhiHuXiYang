@@ -1,0 +1,63 @@
+<view class="container">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="header-icon-wrap">
+        <text class="header-icon-text">?</text>
+      </view>
+      <text class="header-title">使用帮助</text>
+      <text class="header-subtitle">快速了解小程序功能</text>
+    </view>
+  </view>
+
+  <view class="help-list">
+    <view class="help-section" wx:for="{{helpList}}" wx:key="id">
+      <view class="section-header" bindtap="toggleSection" data-id="{{item.id}}">
+        <view class="section-left">
+          <view class="section-icon-wrap" style="background: {{item.color}}">
+            <text class="section-icon-text">{{item.title.charAt(0)}}</text>
+          </view>
+          <text class="section-title">{{item.title}}</text>
+        </view>
+        <view class="section-arrow {{expandedId === item.id ? 'expanded' : ''}}">
+          <text>›</text>
+        </view>
+      </view>
+      
+      <view class="section-content" wx:if="{{expandedId === item.id}}">
+        <view class="help-item" wx:for="{{item.items}}" wx:for-item="helpItem" wx:key="question">
+          <view class="question">
+            <view class="q-icon-wrap">
+              <text class="q-icon-text">Q</text>
+            </view>
+            <text class="q-text">{{helpItem.question}}</text>
+          </view>
+          <view class="answer">
+            <view class="a-icon-wrap">
+              <text class="a-icon-text">A</text>
+            </view>
+            <text class="a-text">{{helpItem.answer}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="contact-section">
+    <view class="contact-card">
+      <text class="contact-title">还有问题？</text>
+      <text class="contact-desc">联系我们的客服热线</text>
+      <button class="contact-btn" bindtap="contactService">
+        <view class="contact-icon-wrap">
+          <text class="contact-icon-text">话</text>
+        </view>
+        <text>拨打 12349 养老服务热线</text>
+      </button>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text class="version">智慧养老服务 v1.0.0</text>
+    <text class="copyright">© 2024 智慧养老服务平台</text>
+  </view>
+</view>

@@ -1,0 +1,22 @@
+<view class="container">
+  <view class="form-section">
+    <view class="form-item">
+      <text class="form-label">联系人姓名</text>
+      <input class="form-input" placeholder="请输入联系人姓名" value="{{form.emergencyContact}}" data-field="emergencyContact" bindinput="onInput" />
+    </view>
+    
+    <view class="form-item">
+      <text class="form-label">联系电话</text>
+      <input class="form-input" type="number" maxlength="11" placeholder="请输入联系电话" value="{{form.emergencyPhone}}" data-field="emergencyPhone" bindinput="onInput" />
+    </view>
+  </view>
+
+  <view class="tip-section">
+    <text class="tip-icon">💡</text>
+    <text class="tip-text">紧急联系人将在您需要紧急救助时被通知</text>
+  </view>
+
+  <view class="btn-section">
+    <button class="save-btn" bindtap="saveEmergency">保存</button>
+  </view>
+</view>

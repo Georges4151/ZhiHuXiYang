@@ -1,0 +1,67 @@
+<view class="container">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="header-title">生活服务</text>
+      <text class="header-desc">专业服务，贴心关怀</text>
+    </view>
+  </view>
+
+  <view class="category-scroll">
+    <scroll-view scroll-x class="category-list">
+      <view class="category-item {{currentCategory === item.id ? 'active' : ''}}" 
+            wx:for="{{categoryList}}" wx:key="id"
+            bindtap="onCategoryChange" data-id="{{item.id}}">
+        <view class="category-icon" style="background: {{item.color}}">
+          <text class="category-icon-text">{{item.iconText}}</text>
+        </view>
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="service-list">
+    <view class="service-item" wx:for="{{serviceList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="service-left">
+        <view class="service-icon" style="background: {{item.iconBg}}">
+          <text class="service-icon-text">{{item.iconText}}</text>
+        </view>
+      </view>
+      <view class="service-content">
+        <view class="service-header">
+          <text class="service-name">{{item.name}}</text>
+          <view class="service-tag">{{item.category}}</view>
+        </view>
+        <text class="service-desc">{{item.description}}</text>
+        <view class="service-footer">
+          <view class="service-meta">
+            <view class="service-rating">
+              <text class="rating-text">好评</text>
+              <text class="rating-value">{{item.rating}}</text>
+            </view>
+            <text class="service-sales">已售 {{item.sales}}</text>
+          </view>
+          <view class="service-price-wrap">
+            <text class="service-price">¥{{item.price}}</text>
+            <text class="service-unit">/次</text>
+          </view>
+        </view>
+      </view>
+      <button class="order-btn" catchtap="goToOrder" data-id="{{item.id}}">预约</button>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{serviceList.length === 0}}">
+    <view class="empty-icon-wrap">
+      <text class="empty-icon-text">空</text>
+    </view>
+    <text class="empty-text">暂无服务项目</text>
+  </view>
+
+  <view class="float-btn" bindtap="makePhoneCall">
+    <view class="float-icon-wrap">
+      <text class="float-icon-text">热线</text>
+    </view>
+    <text class="float-text">服务热线</text>
+  </view>
+</view>

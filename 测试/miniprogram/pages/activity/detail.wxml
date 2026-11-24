@@ -1,0 +1,165 @@
+<view class="container">
+  <view class="content" wx:if="{{!loading && activity}}">
+    <view class="header-section">
+      <view class="category-badge">
+        <text class="category-icon">{{activity.categoryName === '健康讲座' ? '🏥' : activity.categoryName === '文娱活动' ? '🎭' : activity.categoryName === '志愿服务' ? '❤️' : '🎨'}}</text>
+        <text class="category-text">{{activity.categoryName}}</text>
+      </view>
+      <text class="activity-title">{{activity.title}}</text>
+      
+      <view class="status-row">
+        <view class="status-tag {{activity.status === 1 ? 'active' : 'ended'}}">
+          {{activity.status === 1 ? '报名中' : '已结束'}}
+        </view>
+        <view class="participants-info">
+          <text class="participants-count">{{activity.currentParticipants}}/{{activity.maxParticipants}}</text>
+          <text class="participants-label">人已报名</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="info-section">
+      <view class="info-card">
+        <view class="info-row">
+          <view class="info-icon">📅</view>
+          <view class="info-content">
+            <text class="info-label">活动时间</text>
+            <text class="info-value">{{activity.activityTime}}</text>
+          </view>
+        </view>
+        <view class="info-row">
+          <view class="info-icon">📍</view>
+          <view class="info-content">
+            <text class="info-label">活动地点</text>
+            <text class="info-value">{{activity.location}}</text>
+            <text class="info-address">{{activity.address}}</text>
+          </view>
+          <view class="info-action" bindtap="openLocation">
+            <text class="action-text">导航</text>
+          </view>
+        </view>
+        <view class="info-row">
+          <view class="info-icon">👤</view>
+          <view class="info-content">
+            <text class="info-label">主办方</text>
+            <text class="info-value">{{activity.organizer}}</text>
+          </view>
+        </view>
+        <view class="info-row">
+          <view class="info-icon">📞</view>
+          <view class="info-content">
+            <text class="info-label">联系电话</text>
+            <text class="info-value">{{activity.contactPhone}}</text>
+          </view>
+          <view class="info-action" bindtap="makePhoneCall">
+            <text class="action-text">拨打</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="detail-section">
+      <view class="section-header">
+        <text class="section-title">活动详情</text>
+      </view>
+      <view class="detail-content">
+        <text class="detail-text">{{activity.description}}</text>
+      </view>
+    </view>
+
+    <view class="tips-section" wx:if="{{activity.tips && activity.tips.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">温馨提示</text>
+      </view>
+      <view class="tips-list">
+        <view class="tip-item" wx:for="{{activity.tips}}" wx:key="index">
+          <view class="tip-icon">💡</view>
+          <text class="tip-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="comment-section">
+      <view class="section-header">
+        <text class="section-title">评论 ({{comments.length}})</text>
+        <text class="section-action" bindtap="showCommentInput">写评论</text>
+      </view>
+      
+      <view class="comment-list" wx:if="{{comments.length > 0}}">
+        <view class="comment-item" wx:for="{{comments}}" wx:key="id">
+          <view class="comment-avatar">
+            <text class="avatar-text">{{item.userName[0]}}</text>
+          </view>
+          <view class="comment-content">
+            <view class="comment-header">
+              <text class="comment-name">{{item.userName}}</text>
+              <text class="comment-time">{{item.createTime}}</text>
+            </view>
+            <text class="comment-text">{{item.content}}</text>
+            <view class="comment-actions">
+              <view class="action-item {{item.isLiked ? 'liked' : ''}}" bindtap="likeComment" data-id="{{item.id}}">
+                <text class="action-icon">{{item.isLiked ? '❤️' : '🤍'}}</text>
+                <text class="action-count">{{item.likes}}</text>
+              </view>
+            </view>
+            
+            <view class="replies" wx:if="{{item.replies && item.replies.length > 0}}">
+              <view class="reply-item" wx:for="{{item.replies}}" wx:key="id" wx:for-item="reply">
+                <text class="reply-name">{{reply.userName}}：</text>
+                <text class="reply-content">{{reply.content}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="empty-comments" wx:else>
+        <text class="empty-text">暂无评论，快来抢沙发吧~</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer-bar">
+    <view class="footer-left">
+      <view class="footer-item {{isLiked ? 'liked' : ''}}" bindtap="toggleLike">
+        <text class="footer-icon">{{isLiked ? '❤️' : '🤍'}}</text>
+        <text class="footer-text">{{activity.likes}}</text>
+      </view>
+      <view class="footer-item" bindtap="showCommentInput">
+        <text class="footer-icon">💬</text>
+        <text class="footer-text">{{comments.length}}</text>
+      </view>
+      <button class="footer-item share-btn" open-type="share">
+        <text class="footer-icon">📤</text>
+        <text class="footer-text">分享</text>
+      </button>
+    </view>
+    <view class="footer-right">
+      <button class="join-btn {{isJoined ? 'joined' : ''}}" bindtap="joinActivity">
+        {{isJoined ? '取消报名' : activity.currentParticipants >= activity.maxParticipants ? '名额已满' : '立即报名'}}
+      </button>
+    </view>
+  </view>
+
+  <view class="comment-input-bar" wx:if="{{showCommentInput}}">
+    <view class="input-mask" bindtap="hideCommentInput"></view>
+    <view class="input-content">
+      <textarea class="comment-textarea" 
+                placeholder="说点什么吧..." 
+                value="{{commentContent}}" 
+                bindinput="onCommentInput"
+                maxlength="200"
+                auto-focus="{{true}}"
+                fixed="{{true}}"></textarea>
+      <view class="input-actions">
+        <text class="char-count">{{commentContent.length}}/200</text>
+        <button class="submit-btn" bindtap="submitComment">发送</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>

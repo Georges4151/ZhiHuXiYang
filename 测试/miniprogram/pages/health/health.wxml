@@ -1,0 +1,170 @@
+<view class="container">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="header-title">健康管理</text>
+      <text class="header-desc">记录健康数据，守护您的健康</text>
+    </view>
+  </view>
+
+  <view class="tabs">
+    <view class="tab-item {{activeTab === item.id ? 'active' : ''}}" 
+          wx:for="{{tabs}}" wx:key="id" 
+          bindtap="onTabChange" data-id="{{item.id}}">
+      {{item.name}}
+    </view>
+  </view>
+
+  <view class="content" wx:if="{{activeTab === 'overview'}}">
+    <view class="health-overview">
+      <view class="overview-header">
+        <text class="overview-title">今日健康数据</text>
+        <text class="overview-time">{{healthData.measureTime}}</text>
+      </view>
+      
+      <view class="health-cards" wx:if="{{healthData}}">
+        <view class="health-card bp">
+          <view class="card-header">
+            <view class="card-icon-wrap" style="background: linear-gradient(135deg, #F56C6C 0%, #E64545 100%);">
+              <text class="card-icon-text">血</text>
+            </view>
+            <text class="card-label">血压</text>
+          </view>
+          <view class="card-value-wrap">
+            <text class="card-value">{{healthData.bloodPressureHigh}}</text>
+            <text class="card-divider">/</text>
+            <text class="card-value-low">{{healthData.bloodPressureLow}}</text>
+          </view>
+          <text class="card-unit">mmHg</text>
+          <view class="card-status normal">正常</view>
+        </view>
+        
+        <view class="health-card hr">
+          <view class="card-header">
+            <view class="card-icon-wrap" style="background: linear-gradient(135deg, #E6A23C 0%, #D48806 100%);">
+              <text class="card-icon-text">心</text>
+            </view>
+            <text class="card-label">心率</text>
+          </view>
+          <text class="card-value">{{healthData.heartRate}}</text>
+          <text class="card-unit">次/分</text>
+          <view class="card-status normal">正常</view>
+        </view>
+        
+        <view class="health-card bs">
+          <view class="card-header">
+            <view class="card-icon-wrap" style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%);">
+              <text class="card-icon-text">糖</text>
+            </view>
+            <text class="card-label">血糖</text>
+          </view>
+          <text class="card-value">{{healthData.bloodSugar}}</text>
+          <text class="card-unit">mmol/L</text>
+          <view class="card-status normal">正常</view>
+        </view>
+        
+        <view class="health-card wt">
+          <view class="card-header">
+            <view class="card-icon-wrap" style="background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);">
+              <text class="card-icon-text">重</text>
+            </view>
+            <text class="card-label">体重</text>
+          </view>
+          <text class="card-value">{{healthData.weight}}</text>
+          <text class="card-unit">kg</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="tips-section">
+      <view class="section-title">健康小贴士</view>
+      <view class="tips-list">
+        <view class="tip-item" wx:for="{{healthTips}}" wx:key="index">
+          <view class="tip-icon-wrap">
+            <text class="tip-icon-text">Tip</text>
+          </view>
+          <text class="tip-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <button class="add-btn" bindtap="showAddModal">
+      <text class="btn-icon-text">+</text>
+      <text>添加健康数据</text>
+    </button>
+
+    <button class="analyze-btn" bindtap="onAnalyzeHealth">
+      <text class="btn-icon-text">AI</text>
+      <text>健康分析</text>
+    </button>
+  </view>
+
+  <view class="content" wx:if="{{activeTab === 'history'}}">
+    <view class="history-section">
+      <view class="history-list">
+        <view class="history-item" wx:for="{{recentData}}" wx:key="id">
+          <view class="history-date">{{item.measureTime}}</view>
+          <view class="history-data">
+            <view class="data-item">
+              <text class="data-label">血压</text>
+              <text class="data-value">{{item.bloodPressureHigh}}/{{item.bloodPressureLow}}</text>
+            </view>
+            <view class="data-item">
+              <text class="data-label">心率</text>
+              <text class="data-value">{{item.heartRate}}次/分</text>
+            </view>
+            <view class="data-item">
+              <text class="data-label">血糖</text>
+              <text class="data-value">{{item.bloodSugar}}mmol/L</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+</view>
+
+<view class="modal-mask" wx:if="{{showAddModal}}" bindtap="hideAddModal"></view>
+<view class="modal-content" wx:if="{{showAddModal}}">
+  <view class="modal-header">
+    <text class="modal-title">添加健康数据</text>
+    <text class="modal-close" bindtap="hideAddModal">×</text>
+  </view>
+  <view class="modal-body">
+    <view class="form-item">
+      <text class="form-label">收缩压</text>
+      <input class="form-input" type="digit" placeholder="请输入" data-field="bloodPressureHigh" bindinput="onFormInput" />
+      <text class="form-unit">mmHg</text>
+    </view>
+    <view class="form-item">
+      <text class="form-label">舒张压</text>
+      <input class="form-input" type="digit" placeholder="请输入" data-field="bloodPressureLow" bindinput="onFormInput" />
+      <text class="form-unit">mmHg</text>
+    </view>
+    <view class="form-item">
+      <text class="form-label">心率</text>
+      <input class="form-input" type="digit" placeholder="请输入" data-field="heartRate" bindinput="onFormInput" />
+      <text class="form-unit">次/分</text>
+    </view>
+    <view class="form-item">
+      <text class="form-label">血糖</text>
+      <input class="form-input" type="digit" placeholder="请输入" data-field="bloodSugar" bindinput="onFormInput" />
+      <text class="form-unit">mmol/L</text>
+    </view>
+    <view class="form-item">
+      <text class="form-label">体温</text>
+      <input class="form-input" type="digit" placeholder="请输入" data-field="temperature" bindinput="onFormInput" />
+      <text class="form-unit">°C</text>
+    </view>
+    <view class="form-item">
+      <text class="form-label">体重</text>
+      <input class="form-input" type="digit" placeholder="请输入" data-field="weight" bindinput="onFormInput" />
+      <text class="form-unit">kg</text>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <button class="submit-btn" bindtap="submitHealthData">提交</button>
+  </view>
+</view>

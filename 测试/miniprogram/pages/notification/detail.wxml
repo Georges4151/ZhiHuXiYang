@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="detail-card">
+    <view class="detail-header">
+      <view class="detail-icon">
+        <text class="icon-{{notification.type}}">{{typeIcons[notification.type]}}</text>
+      </view>
+      <text class="detail-title">{{notification.title}}</text>
+      <text class="detail-time">{{notification.createTime}}</text>
+    </view>
+    
+    <view class="detail-content">
+      <text class="content-text">{{notification.content}}</text>
+    </view>
+  </view>
+
+  <view class="type-tag type-{{notification.type}}">
+    {{typeNames[notification.type]}}
+  </view>
+
+  <view class="action-section" wx:if="{{notification.type === 1 && notification.extraData}}">
+    <button class="action-btn" bindtap="viewOrder">查看相关订单</button>
+  </view>
+</view>

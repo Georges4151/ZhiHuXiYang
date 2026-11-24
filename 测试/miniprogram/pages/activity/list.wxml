@@ -1,0 +1,95 @@
+<view class="container">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="header-title">社区活动</text>
+      <text class="header-subtitle">丰富您的晚年生活</text>
+    </view>
+  </view>
+
+  <view class="categories">
+    <scroll-view scroll-x class="category-scroll">
+      <view class="category-item {{currentCategory === item.id ? 'active' : ''}}" 
+            wx:for="{{categories}}" wx:key="id" 
+            data-id="{{item.id}}" 
+            bindtap="onCategoryChange">
+        <text>{{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="activity-list" wx:if="{{!loading && filteredActivities.length > 0}}">
+    <view class="activity-card" wx:for="{{filteredActivities}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="card-header">
+        <view class="category-tag">
+          <view class="category-icon-wrap" style="background: {{item.categoryName === '健康讲座' ? 'linear-gradient(135deg, #F56C6C 0%, #E64545 100%)' : item.categoryName === '文娱活动' ? 'linear-gradient(135deg, #E6A23C 0%, #D48806 100%)' : item.categoryName === '志愿服务' ? 'linear-gradient(135deg, #67C23A 0%, #4A9F29 100%)' : 'linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%)'}}">
+            <text class="category-icon-text">{{item.categoryName.charAt(0)}}</text>
+          </view>
+          <text class="category-name">{{item.categoryName}}</text>
+        </view>
+        <view class="status-tag {{item.status === 1 ? 'active' : 'ended'}}">
+          {{item.status === 1 ? '报名中' : '已结束'}}
+        </view>
+      </view>
+      
+      <view class="card-body">
+        <text class="activity-title">{{item.title}}</text>
+        <text class="activity-desc">{{item.description}}</text>
+        
+        <view class="activity-info">
+          <view class="info-item">
+            <view class="info-icon-wrap">
+              <text class="info-icon-text">日</text>
+            </view>
+            <text class="info-text">{{item.activityTime}}</text>
+          </view>
+          <view class="info-item">
+            <view class="info-icon-wrap">
+              <text class="info-icon-text">址</text>
+            </view>
+            <text class="info-text">{{item.location}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="card-footer">
+        <view class="participants">
+          <view class="avatar-group">
+            <view class="avatar" wx:for="{{3}}" wx:key="*this"></view>
+          </view>
+          <text class="participants-text">{{item.currentParticipants}}/{{item.maxParticipants}}人已报名</text>
+        </view>
+        <view class="interactions">
+          <view class="interaction-item">
+            <view class="interaction-icon-wrap" style="background: linear-gradient(135deg, #F56C6C 0%, #E64545 100%);">
+              <text class="interaction-icon-text">赞</text>
+            </view>
+            <text class="interaction-count">{{item.likes}}</text>
+          </view>
+          <view class="interaction-item">
+            <view class="interaction-icon-wrap" style="background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);">
+              <text class="interaction-icon-text">评</text>
+            </view>
+            <text class="interaction-count">{{item.comments}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{item.currentParticipants / item.maxParticipants * 100}}%;"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{!loading && filteredActivities.length === 0}}">
+    <view class="empty-icon-wrap">
+      <text class="empty-icon-text">空</text>
+    </view>
+    <text class="empty-text">暂无活动</text>
+  </view>
+
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>

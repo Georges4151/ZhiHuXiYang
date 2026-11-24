@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="header-title">意见反馈</text>
+      <text class="header-desc">感谢您的宝贵意见</text>
+    </view>
+  </view>
+
+  <view class="feedback-form">
+    <view class="form-item">
+      <text class="form-label">反馈内容</text>
+      <textarea class="form-textarea" placeholder="请输入您的意见或建议..." value="{{content}}" bindinput="onContentChange" maxlength="500" />
+      <text class="word-count">{{content.length}}/500</text>
+    </view>
+    
+    <view class="form-item">
+      <text class="form-label">联系方式（选填）</text>
+      <input class="form-input" placeholder="手机号或微信号" value="{{contact}}" bindinput="onContactChange" />
+    </view>
+
+    <button class="submit-btn" bindtap="submitFeedback" loading="{{loading}}">
+      提交反馈
+    </button>
+  </view>
+
+  <view class="history-section" wx:if="{{feedbackList.length > 0}}">
+    <view class="section-title">我的反馈</view>
+    <view class="feedback-list">
+      <view class="feedback-item" wx:for="{{feedbackList}}" wx:key="id">
+        <view class="feedback-header">
+          <text class="feedback-time">{{item.createTime}}</text>
+          <text class="feedback-status {{item.status === 1 ? 'replied' : ''}}">{{item.status === 1 ? '已回复' : '待处理'}}</text>
+        </view>
+        <text class="feedback-content">{{item.content}}</text>
+        <view class="feedback-reply" wx:if="{{item.reply}}">
+          <text class="reply-label">回复：</text>
+          <text class="reply-content">{{item.reply}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="tips">
+    <text class="tips-title">💡 温馨提示</text>
+    <text class="tips-content">您的反馈对我们非常重要，我们会尽快处理并回复您的问题。</text>
+  </view>
+</view>

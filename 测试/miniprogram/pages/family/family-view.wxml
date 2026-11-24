@@ -1,0 +1,137 @@
+<view class="family-view-container">
+  <!-- 顶部用户信息 -->
+  <view class="header">
+    <view class="user-selector" wx:if="{{bindUsers.length > 0}}">
+      <scroll-view scroll-x class="user-scroll">
+        <view class="user-list">
+          <view 
+            wx:for="{{bindUsers}}" 
+            wx:key="id"
+            class="user-item {{selectedUser && selectedUser.userId === item.userId ? 'active' : ''}}"
+            data-index="{{index}}"
+            bindtap="onUserSelect"
+          >
+            <image class="user-avatar" src="{{item.userAvatar || '/images/icon/user.png'}}" mode="aspectFill"/>
+            <text class="user-name">{{item.userName}}</text>
+            <text class="user-relation">{{item.relation}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="empty-users" wx:else>
+      <text>暂无绑定的老人</text>
+    </view>
+  </view>
+
+  <!-- 标签切换 -->
+  <view class="tab-bar">
+    <view 
+      wx:for="{{tabs}}" 
+      wx:key="id"
+      class="tab-item {{activeTab === item.id ? 'active' : ''}}"
+      data-id="{{item.id}}"
+      bindtap="onTabChange"
+    >
+      {{item.name}}
+      <text class="badge" wx:if="{{item.id === 'notification' && unreadCount > 0}}">{{unreadCount}}</text>
+    </view>
+  </view>
+
+  <!-- 健康数据 -->
+  <view class="content health-content" wx:if="{{activeTab === 'health'}}">
+    <view class="health-summary" wx:if="{{healthData.length > 0}}">
+      <view class="summary-item">
+        <text class="summary-value">{{healthData.length}}</text>
+        <text class="summary-label">最近记录</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-value">7</text>
+        <text class="summary-label">监测天数</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-value {{healthData.some(item => item.isAbnormal === 1) ? 'warning' : 'normal'}}">
+          {{healthData.some(item => item.isAbnormal === 1) ? '异常' : '正常'}}
+        </text>
+        <text class="summary-label">健康状态</text>
+      </view>
+    </view>
+
+    <view class="health-list">
+      <view class="health-item" wx:for="{{healthData}}" wx:key="id">
+        <view class="health-header">
+          <text class="health-type">{{item.dataType}}</text>
+          <text class="health-time">{{item.recordTime}}</text>
+        </view>
+        <view class="health-value {{item.isAbnormal === 1 ? 'abnormal' : ''}}">
+          {{item.dataValue}}
+          <text class="abnormal-tag" wx:if="{{item.isAbnormal === 1}}">异常</text>
+        </view>
+        <text class="health-remark" wx:if="{{item.remark}}">{{item.remark}}</text>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{healthData.length === 0}}">
+      <text>暂无健康数据</text>
+    </view>
+  </view>
+
+  <!-- 服务进度 -->
+  <view class="content service-content" wx:if="{{activeTab === 'service'}}">
+    <view class="order-list">
+      <view class="order-item" wx:for="{{serviceOrders}}" wx:key="id" bindtap="onOrderDetail" data-id="{{item.id}}">
+        <view class="order-header">
+          <text class="order-no">订单号：{{item.orderNo}}</text>
+          <text class="order-status" style="color: {{getStatusColor(item.orderStatus)}}">
+            {{getStatusText(item.orderStatus)}}
+          </text>
+        </view>
+        <view class="order-body">
+          <text class="service-name">{{item.serviceName}}</text>
+          <text class="service-time">预约时间：{{item.appointmentDate}} {{item.appointmentTime}}</text>
+          <text class="service-address">{{item.address}}</text>
+        </view>
+        <view class="order-footer">
+          <text class="order-amount">¥{{item.amount}}</text>
+          <text class="order-time">{{item.createdAt}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{serviceOrders.length === 0}}">
+      <text>暂无服务订单</text>
+    </view>
+  </view>
+
+  <!-- 消息通知 -->
+  <view class="content notification-content" wx:if="{{activeTab === 'notification'}}">
+    <view class="notification-header" wx:if="{{notifications.length > 0}}">
+      <text class="mark-all" bindtap="onMarkAllRead">全部标记为已读</text>
+    </view>
+
+    <view class="notification-list">
+      <view 
+        class="notification-item {{item.isRead === 0 ? 'unread' : ''}}" 
+        wx:for="{{notifications}}" 
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onMarkRead"
+      >
+        <view class="notification-icon">
+          <text wx:if="{{item.type === 'emergency'}}">🚨</text>
+          <text wx:elif="{{item.type === 'health'}}">🏥</text>
+          <text wx:else>📋</text>
+        </view>
+        <view class="notification-body">
+          <text class="notification-title">{{item.title}}</text>
+          <text class="notification-content">{{item.content}}</text>
+          <text class="notification-time">{{item.createdAt}}</text>
+        </view>
+        <view class="unread-dot" wx:if="{{item.isRead === 0}}"></view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{notifications.length === 0}}">
+      <text>暂无消息通知</text>
+    </view>
+  </view>
+</view>

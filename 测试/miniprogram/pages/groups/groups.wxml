@@ -1,0 +1,57 @@
+<view class="groups-container">
+  <!-- 分类标签 -->
+  <scroll-view class="category-scroll" scroll-x>
+    <view class="category-tabs">
+      <view 
+        wx:for="{{categories}}" 
+        wx:key="id"
+        class="tab-item {{category === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onCategoryChange"
+      >
+        {{item.name}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 小组列表 -->
+  <view class="group-list">
+    <view class="group-item" wx:for="{{groups}}" wx:key="id" bindtap="onGroupDetail" data-id="{{item.id}}">
+      <image class="group-cover" src="{{item.coverImage || '/images/default-group.png'}}" mode="aspectFill"/>
+      <view class="group-info">
+        <text class="group-name">{{item.name}}</text>
+        <text class="group-desc">{{item.description}}</text>
+        <view class="group-meta">
+          <text class="member-count">{{item.memberCount}}人</text>
+          <text class="post-count">{{item.postCount}}帖子</text>
+        </view>
+      </view>
+      <button 
+        class="join-btn {{item.isMember ? 'joined' : ''}}" 
+        size="mini"
+        data-id="{{item.id}}"
+        data-index="{{index}}"
+        catchtap="onJoinGroup"
+      >
+        {{item.isMember ? '已加入' : '加入'}}
+      </button>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="loading-more" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+  <view class="no-more" wx:if="{{!hasMore && groups.length > 0}}">
+    <text>没有更多了</text>
+  </view>
+  <view class="empty" wx:if="{{groups.length === 0 && !loading}}">
+    <text>暂无小组</text>
+  </view>
+
+  <!-- 创建按钮 -->
+  <view class="create-btn" bindtap="onCreateGroup">
+    <text class="plus">+</text>
+    <text class="text">创建小组</text>
+  </view>
+</view>

@@ -1,0 +1,164 @@
+<view class="container">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="user-info" wx:if="{{isLoggedIn && userInfo}}">
+        <view class="avatar" style="background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);">
+          <text class="avatar-text">{{userInfo.name ? userInfo.name.charAt(0) : '用'}}</text>
+        </view>
+        <view class="info">
+          <text class="name">{{userInfo.name || '用户'}}</text>
+          <text class="phone">{{userInfo.phone || '未绑定手机号'}}</text>
+        </view>
+        <view class="edit-btn" bindtap="goToAccountSetting">
+          <view class="edit-icon-wrap">
+            <text class="edit-icon-text">改</text>
+          </view>
+          <text>编辑</text>
+        </view>
+      </view>
+      <view class="login-btn" wx:else bindtap="goToLogin">
+        <view class="login-icon-wrap">
+          <text class="login-icon-text">登</text>
+        </view>
+        <text>点击登录</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="quick-actions" wx:if="{{isLoggedIn}}">
+    <view class="quick-item" bindtap="goToMenu" data-url="/pages/health/health">
+      <view class="quick-icon" style="background: #F56C6C;">
+        <text class="quick-icon-text">健</text>
+      </view>
+      <text class="quick-name">健康档案</text>
+    </view>
+    <view class="quick-item" bindtap="goToMenu" data-url="/pages/family/family">
+      <view class="quick-icon" style="background: #E6A23C;">
+        <text class="quick-icon-text">家</text>
+      </view>
+      <text class="quick-name">我的家属</text>
+    </view>
+    <view class="quick-item" bindtap="goToMenu" data-url="/pages/order/list">
+      <view class="quick-icon" style="background: #4A90D9;">
+        <text class="quick-icon-text">单</text>
+      </view>
+      <text class="quick-name">我的订单</text>
+    </view>
+    <view class="quick-item" bindtap="makePhoneCall">
+      <view class="quick-icon" style="background: #67C23A;">
+        <text class="quick-icon-text">话</text>
+      </view>
+      <text class="quick-name">联系客服</text>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="section-header">
+      <text class="section-title">常用功能</text>
+    </view>
+    <view class="menu-list">
+      <view class="menu-item" wx:for="{{menuList}}" wx:key="id" bindtap="goToMenu" data-url="{{item.url}}">
+        <view class="menu-left">
+          <view class="menu-icon-wrap" style="background: {{item.color}}">
+            <text class="menu-icon-text">{{item.iconText}}</text>
+          </view>
+          <view class="menu-info">
+            <text class="menu-name">{{item.name}}</text>
+            <text class="menu-desc">{{item.desc}}</text>
+          </view>
+        </view>
+        <view class="menu-right">
+          <view class="menu-arrow"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="section-header">
+      <text class="section-title">设置</text>
+    </view>
+    <view class="menu-list">
+      <view class="menu-item" wx:for="{{settingList}}" wx:key="id" bindtap="goToMenu" data-url="{{item.url}}">
+        <view class="menu-left">
+          <view class="menu-icon-wrap" style="background: {{item.color}}">
+            <text class="menu-icon-text">{{item.iconText}}</text>
+          </view>
+          <text class="menu-name setting-name">{{item.name}}</text>
+        </view>
+        <view class="menu-right">
+          <view class="menu-arrow"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="service-section">
+    <button class="service-btn" bindtap="makePhoneCall">
+      <view class="service-icon-wrap">
+        <text class="service-icon-text">话</text>
+      </view>
+      <text>养老服务热线：12349</text>
+    </button>
+  </view>
+
+  <view class="action-btns" wx:if="{{isLoggedIn}}">
+    <button class="cache-btn" bindtap="clearCache">
+      <view class="btn-icon-wrap" style="background: linear-gradient(135deg, #909399 0%, #606266 100%);">
+        <text class="btn-icon-text">清</text>
+      </view>
+      <text>清除缓存</text>
+    </button>
+    <button class="logout-btn" bindtap="logout">
+      <view class="btn-icon-wrap" style="background: linear-gradient(135deg, #F56C6C 0%, #E64545 100%);">
+        <text class="btn-icon-text">退</text>
+      </view>
+      <text>退出登录</text>
+    </button>
+  </view>
+
+  <view class="footer">
+    <text class="version">智慧养老服务 v1.0.0</text>
+    <text class="copyright">© 2024 智慧养老服务平台</text>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showEditModal}}" bindtap="hideEditModal"></view>
+<view class="modal-content" wx:if="{{showEditModal}}">
+  <view class="modal-header">
+    <text class="modal-title">编辑资料</text>
+    <text class="modal-close" bindtap="hideEditModal">×</text>
+  </view>
+  <view class="modal-body">
+    <view class="form-item">
+      <text class="form-label">姓名</text>
+      <input class="form-input" placeholder="请输入姓名" value="{{editForm.name}}" data-field="name" bindinput="onEditInput" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">性别</text>
+      <radio-group class="gender-group" bindchange="onGenderChange">
+        <label class="gender-item">
+          <radio value="1" checked="{{editForm.gender === 1}}" color="#4A90D9" />
+          <text>男</text>
+        </label>
+        <label class="gender-item">
+          <radio value="2" checked="{{editForm.gender === 2}}" color="#4A90D9" />
+          <text>女</text>
+        </label>
+      </radio-group>
+    </view>
+    <view class="form-item">
+      <text class="form-label">紧急联系人</text>
+      <input class="form-input" placeholder="请输入紧急联系人" value="{{editForm.emergencyContact}}" data-field="emergencyContact" bindinput="onEditInput" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">紧急联系电话</text>
+      <input class="form-input" type="number" maxlength="11" placeholder="请输入紧急联系电话" value="{{editForm.emergencyPhone}}" data-field="emergencyPhone" bindinput="onEditInput" />
+    </view>
+  </view>
+  <view class="modal-footer">
+    <button class="cancel-btn" bindtap="hideEditModal">取消</button>
+    <button class="save-btn" bindtap="saveProfile">保存</button>
+  </view>
+</view>

@@ -1,0 +1,43 @@
+<view class="container">
+  <view class="tabs">
+    <view class="tab-item {{currentTab === item.id ? 'active' : ''}}" 
+          wx:for="{{tabs}}" wx:key="id"
+          bindtap="onTabChange" data-id="{{item.id}}">
+      {{item.name}}
+    </view>
+  </view>
+
+  <view class="order-list">
+    <view class="order-item" wx:for="{{orderList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="order-header">
+        <text class="order-no">订单号：{{item.orderNo}}</text>
+        <text class="order-status" style="color: {{item.status === 0 ? '#E6A23C' : item.status === 1 ? '#409EFF' : item.status === 2 ? '#67C23A' : '#909399'}}">{{item.statusText}}</text>
+      </view>
+      <view class="order-content">
+        <view class="service-icon">🛎️</view>
+        <view class="service-info">
+          <text class="service-name">{{item.serviceName}}</text>
+          <text class="service-time">预约时间：{{item.appointmentTime}}</text>
+        </view>
+        <view class="service-price">
+          <text class="price-label">金额</text>
+          <text class="price-value">¥{{item.price}}</text>
+        </view>
+      </view>
+      <view class="order-footer">
+        <text class="order-time">下单时间：{{item.createTime}}</text>
+      </view>
+      <view class="order-actions-wrap" wx:if="{{item.status === 0 || item.status === 3 || item.status === 1 || item.status === 2}}">
+        <button class="action-btn cancel" wx:if="{{item.status === 0}}" catchtap="cancelOrder" data-id="{{item.id}}">取消订单</button>
+        <button class="action-btn pay" wx:if="{{item.status === 0}}" catchtap="goToPay" data-id="{{item.id}}">去支付</button>
+        <button class="action-btn complete" wx:if="{{item.status === 1}}" catchtap="completeOrder" data-id="{{item.id}}">确认完成</button>
+        <button class="action-btn detail" wx:if="{{item.status === 2 || item.status === 3}}">查看详情</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{orderList.length === 0}}">
+    <text class="empty-icon">📭</text>
+    <text class="empty-text">暂无订单</text>
+  </view>
+</view>

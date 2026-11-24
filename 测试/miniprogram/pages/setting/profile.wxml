@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="form-section">
+    <view class="form-item">
+      <text class="form-label">昵称</text>
+      <input class="form-input" placeholder="请输入昵称" value="{{form.name}}" data-field="name" bindinput="onInput" />
+    </view>
+    
+    <view class="form-item">
+      <text class="form-label">性别</text>
+      <picker mode="selector" range="{{genderOptions}}" range-key="label" value="{{genderIndex}}" bindchange="onGenderChange">
+        <view class="form-picker">
+          <text class="picker-value">{{genderOptions[genderIndex].label}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+    
+    <view class="form-item">
+      <text class="form-label">生日</text>
+      <picker mode="date" value="{{form.birthday}}" start="1940-01-01" end="{{today}}" bindchange="onDateChange">
+        <view class="form-picker">
+          <text class="picker-value {{form.birthday ? '' : 'placeholder'}}">{{form.birthday || '请选择生日'}}</text>
+          <text class="picker-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="btn-section">
+    <button class="save-btn" bindtap="saveProfile">保存</button>
+  </view>
+</view>

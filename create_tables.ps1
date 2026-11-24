@@ -1,0 +1,6 @@
+$env:MYSQL_PWD="wxh20051017"
+$sql1 = "CREATE TABLE IF NOT EXISTS activity (id BIGINT NOT NULL AUTO_INCREMENT, title VARCHAR(200) NOT NULL, description TEXT, category INT DEFAULT 1, cover_image VARCHAR(500), location VARCHAR(200), start_time DATETIME, end_time DATETIME, registration_deadline DATETIME, max_participants INT DEFAULT 50, current_participants INT DEFAULT 0, likes INT DEFAULT 0, organizer_id BIGINT, organizer_name VARCHAR(100), contact_phone VARCHAR(20), tips TEXT, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, deleted INT DEFAULT 0, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+$sql2 = "CREATE TABLE IF NOT EXISTS activity_comment (id BIGINT NOT NULL AUTO_INCREMENT, activity_id BIGINT NOT NULL, user_id BIGINT NOT NULL, user_name VARCHAR(100), content TEXT NOT NULL, parent_id BIGINT DEFAULT 0, reply_to_user_id BIGINT, reply_to_user_name VARCHAR(100), likes INT DEFAULT 0, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, deleted INT DEFAULT 0, PRIMARY KEY (id), KEY idx_activity_id (activity_id), KEY idx_user_id (user_id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+$sql1 | mysql -u root elderly_care
+$sql2 | mysql -u root elderly_care
+Write-Host "Tables created successfully!"

@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="section">
+    <view class="section-title">常见健康问题（可多选）</view>
+    <view class="tag-list">
+      <view class="tag-item {{item.selected ? 'selected' : ''}}" 
+            wx:for="{{healthTags}}" 
+            wx:key="name" 
+            bindtap="toggleTag"
+            data-index="{{index}}">
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">其他健康情况</view>
+    <textarea class="textarea" 
+              placeholder="请输入其他健康状况或特殊需求" 
+              value="{{otherCondition}}"
+              bindinput="onOtherInput"
+              maxlength="200">
+    </textarea>
+  </view>
+
+  <view class="btn-section">
+    <button class="save-btn" bindtap="saveHealth">保存</button>
+  </view>
+</view>

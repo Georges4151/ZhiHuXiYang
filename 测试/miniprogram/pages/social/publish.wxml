@@ -1,0 +1,66 @@
+<view class="publish-container">
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <view class="nav-btn cancel" bindtap="cancelPublish">取消</view>
+    <view class="nav-title">发布动态</view>
+    <view class="nav-btn submit {{submitting || (!content && images.length === 0) ? 'disabled' : ''}}" bindtap="submitPublish">
+      {{submitting ? '发布中...' : '发布'}}
+    </view>
+  </view>
+
+  <!-- 分类选择 -->
+  <view class="category-section">
+    <text class="section-label">选择分类：</text>
+    <view class="category-list">
+      <view 
+        wx:for="{{categories}}" 
+        wx:key="id"
+        class="category-item {{category === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onCategoryChange"
+      >
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 内容输入 -->
+  <view class="content-section">
+    <textarea 
+      class="content-input"
+      placeholder="分享您的生活点滴..."
+      placeholder-class="placeholder"
+      maxlength="{{maxLength}}"
+      bindinput="onContentInput"
+      value="{{content}}"
+      auto-height
+    />
+    <text class="word-count">{{content.length}}/{{maxLength}}</text>
+  </view>
+
+  <!-- 图片选择 -->
+  <view class="image-section">
+    <view class="image-list">
+      <!-- 已选图片 -->
+      <view class="image-item" wx:for="{{images}}" wx:key="*this">
+        <image class="preview-img" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-src="{{item}}"/>
+        <view class="delete-btn" bindtap="deleteImage" data-index="{{index}}">
+          <text class="delete-icon">×</text>
+        </view>
+      </view>
+      
+      <!-- 添加图片按钮 -->
+      <view class="add-image" wx:if="{{images.length < 9}}" bindtap="chooseImage">
+        <text class="add-icon">+</text>
+        <text class="add-text">添加图片</text>
+        <text class="image-count">{{images.length}}/9</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tips-section">
+    <text class="tips-icon">💡</text>
+    <text class="tips-text">温馨提示：请发布积极健康的内容，共同维护良好的社区氛围</text>
+  </view>
+</view>

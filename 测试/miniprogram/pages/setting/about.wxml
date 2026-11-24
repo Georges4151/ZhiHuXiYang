@@ -1,0 +1,54 @@
+<view class="container">
+  <view class="header">
+    <view class="logo">🏠</view>
+    <text class="app-name">智慧养老服务平台</text>
+    <text class="version">v1.0.0</text>
+  </view>
+
+  <view class="info-section">
+    <view class="info-item">
+      <text class="info-label">平台介绍</text>
+      <text class="info-content">智慧养老服务平台致力于为老年人提供便捷、贴心的养老服务，包括居家照护、健康管理、紧急救助等多种服务。</text>
+    </view>
+  </view>
+
+  <view class="list-section">
+    <view class="list-item" bindtap="copyWechat">
+      <text class="list-label">官方微信</text>
+      <view class="list-right">
+        <text class="list-value">SmartElderlyCare</text>
+        <text class="copy-btn">复制</text>
+      </view>
+    </view>
+    <view class="list-item" bindtap="makePhoneCall">
+      <text class="list-label">服务热线</text>
+      <view class="list-right">
+        <text class="list-value">12349</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+    <view class="list-item" bindtap="copyEmail">
+      <text class="list-label">联系邮箱</text>
+      <view class="list-right">
+        <text class="list-value">service@elderly.com</text>
+        <text class="copy-btn">复制</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="list-section">
+    <view class="list-item">
+      <text class="list-label">当前版本</text>
+      <text class="list-value">v1.0.0</text>
+    </view>
+    <view class="list-item" bindtap="checkUpdate">
+      <text class="list-label">检查更新</text>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text class="copyright">© 2024 智慧养老服务平台</text>
+    <text class="icp">让养老更智慧，让生活更美好</text>
+  </view>
+</view>

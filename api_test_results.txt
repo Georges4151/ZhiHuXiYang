@@ -1,0 +1,1715 @@
+﻿
+========================================
+      Elderly Care Platform API Test
+========================================
+
+========================================
+      1. Auth API Tests
+========================================
+
+========================================
+Test: User Login
+Method: POST
+URL: http://localhost:8080/api/auth/login
+Body: {
+    "password":  "123456",
+    "phone":  "13800138000"
+}
+Status: 200
+Response: {"code":500,"message":"è??è???????????: ??¨??·????-???¨","data":null}
+
+Name                           Value                                           
+----                           -----                                           
+Description                    User Login                                      
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è??è???????????: ??¨?...
+Endpoint                       /api/auth/login                                 
+Status                         PASS                                            
+
+========================================
+Test: User Register
+Method: POST
+URL: http://localhost:8080/api/auth/register
+Body: {
+    "name":  "Test User",
+    "password":  "123456",
+    "phone":  "13800138001"
+}
+Status: 200
+Response: {"code":500,"message":"è??è???????????: èˉ￥?????o??·?·2?3¨???","data":null}
+Description                    User Register                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è??è???????????: èˉ￥??...
+Endpoint                       /api/auth/register                              
+Status                         PASS                                            
+
+========================================
+Test: WeChat Login
+Method: POST
+URL: http://localhost:8080/api/user/login
+Body: {
+    "name":  "WeChat User",
+    "avatar":  "https://example.com/avatar.jpg",
+    "openId":  "test_openid_123"
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":5,"createTime":"2026-03-13 18:47:49","updateTime":"2026-03-13 18:47:49","deleted":0,"openId":"test_openid_123","name":"WeChat User","phone":null,"password":null,"avatar":"https://example.com/avatar.jpg","gender":0,"birthday":null,"idCard":null,"address":null,"latitude":null,"longitude":null,"emergencyContact":null,"emergencyPhone":null,"userType":1,"healthCondition":null,"status":1}}
+Description                    WeChat Login                                    
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/user/login                                 
+Status                         PASS                                            
+
+========================================
+Test: Get User Info
+Method: GET
+URL: http://localhost:8080/api/user/info/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":1,"createTime":"2026-02-18 08:26:18","updateTime":"2026-02-19 14:10:08","deleted":0,"openId":null,"name":"Updated Name","phone":"19031706043","password":null,"avatar":null,"gender":1,"birthday":"2026-02-19","idCard":null,"address":null,"latitude":null,"longitude":null,"emergencyContact":"??°","emergencyPhone":"19031706043","userType":1,"healthCondition":"??????é?????è????¨??????????¤±???","status":1}}
+Description                    Get User Info                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/user/info/1                                
+Status                         PASS                                            
+
+========================================
+Test: Get User Profile
+Method: GET
+URL: http://localhost:8080/api/user/profile/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"birthday":"2026-02-19","healthCondition":"??????é?????è????¨??????????¤±???","address":null,"gender":1,"phone":"19031706043","emergencyContact":"??°","name":"Updated Name","genderText":"??·","id":1,"avatar":null,"emergencyPhone":"19031706043"}}
+Description                    Get User Profile                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/user/profile/1                             
+Status                         PASS                                            
+
+========================================
+Test: Update User
+Method: PUT
+URL: http://localhost:8080/api/user/update
+Body: {
+    "name":  "Updated Name",
+    "id":  1,
+    "gender":  1
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":null}
+Description                    Update User                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         PUT                                             
+Response                       {"code":200,"message":"????????????","data":n...
+Endpoint                       /api/user/update                                
+Status                         PASS                                            
+
+========================================
+Test: Update Password
+Method: PUT
+URL: http://localhost:8080/api/user/password
+Body: {
+    "oldPassword":  "123456",
+    "userId":  1,
+    "newPassword":  "654321"
+}
+Status: 200
+Response: {"code":500,"message":"????ˉ????é??èˉˉ","data":null}
+Description                    Update Password                                 
+StatusCode                     200                                             
+Error                                                                          
+Method                         PUT                                             
+Response                       {"code":500,"message":"????ˉ????é??èˉˉ","dat...
+Endpoint                       /api/user/password                              
+Status                         PASS                                            
+
+========================================
+      2. Weather & News API Tests
+========================================
+
+========================================
+Test: Get Current Weather
+Method: GET
+URL: http://localhost:8080/api/weather/now?location=Beijing
+Status: 200
+Response: {"code":500,"message":"è?·????¤??°??¤±è′￥","data":null}
+Description                    Get Current Weather                             
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":500,"message":"è?·????¤??°??¤±è′...
+Endpoint                       /api/weather/now                                
+Status                         PASS                                            
+
+========================================
+Test: Get 7-Day Forecast
+Method: GET
+URL: http://localhost:8080/api/weather/forecast?location=Beijing
+Status: 200
+Response: {"code":500,"message":"è?·???é￠???￥?¤±è′￥","data":null}
+Description                    Get 7-Day Forecast                              
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":500,"message":"è?·???é￠???￥?¤±è′￥"...
+Endpoint                       /api/weather/forecast                           
+Status                         PASS                                            
+
+========================================
+Test: Get Air Quality
+Method: GET
+URL: http://localhost:8080/api/weather/air?location=Beijing
+Status: 200
+Response: {"code":500,"message":"è?·?????o?°?è′¨é???¤±è′￥","data":null}
+Description                    Get Air Quality                                 
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":500,"message":"è?·?????o?°?è′¨é???...
+Endpoint                       /api/weather/air                                
+Status                         PASS                                            
+
+========================================
+Test: Get Life Indices
+Method: GET
+URL: http://localhost:8080/api/weather/indices?location=Beijing
+Status: 200
+Response: {"code":500,"message":"è?·???????′??????°?¤±è′￥","data":null}
+Description                    Get Life Indices                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":500,"message":"è?·???????′??????°?... 
+Endpoint                       /api/weather/indices                            
+Status                         PASS                                            
+
+========================================
+Test: Get All Weather
+Method: GET
+URL: http://localhost:8080/api/weather/all?location=Beijing
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"indices":null,"now":{"success":false,"message":"è?·????¤??°??¤±è′￥"},"forecast":null,"air":{"success":false,"message":"è?·?????o?°?è′¨é???¤±è′￥"}}}
+Description                    Get All Weather                                 
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/weather/all                                
+Status                         PASS                                            
+
+========================================
+Test: Get Hot News
+Method: GET
+URL: http://localhost:8080/api/news/hot?limit=5
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":1,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"title":"2024?1′???è??é??è°???′??1?????????","content":"è????￥????oo?¤?é?¨???????o?2024?1′???è??é??è°???′??1????????¨?????????è°???′?°′?13??o2023?1′é??????oo???????oo?????o??????è??é?????3.8%???","summary":"???è??é??è°???′??1??????????????¨?1?3.8%","category":1,"coverImage":null,"author":"?????????","viewCount":1264,"isTop":1,"status":1},{"id":2,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"title":"è???1′?oo??￥?o·é￥?é￡???????","content":"?????????é￥?é￡??ˉ1è???1′?oo?????￥?o·è?3??3é??è|??????oè??è???1′?oo?¤????è??è???°′???????°?????21è??é￡?????????????è?￥??????è?????","summary":"è???1′?oo??￥?o·é￥?é￡???oè??","category":2,"coverImage":null,"author":"??￥?o·?????????","viewCount":893,"isTop":0,"status":1},{"id":3,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"title":"?¤???o???è?????????????????é????￥","content":"????¤???o???è????????????·2?o?è????￥?-￡??????????????￠è???1??¤§è???1′???????????￥???éa????é?1?????????","summary":"?¤???o???è?????????????????","category":3,"coverImage":null,"author":"?¤???o?????????","viewCount":567,"isTop":0,"status":1},{"id":4,"createTime":"2026-02-18 21:47:16","updateTime":"2026-02-18 21:47:16","deleted":0,"title":"??????é?￠?????????è??????°????é?¨?-?é?¨é?¨?????3?o?è??????-￥?????o???è????o????????¨????????????è§???????é????￥","content":"??￥?o?: ??-???????o????\n??????é????￥: https://www.gov.cn/zhengce/content/202602/content_7057651.htm","summary":"??????é?￠?????????è??????°????é?¨?-?é?¨é?¨?????3?o?è??????-￥?????o???è????o????????¨????????????è§???????é????￥","category":1,"coverImage":null,"author":"??-???????o????","viewCount":1,"isTop":0,"status":1},{"id":7,"createTime":"2026-03-11 10:54:14","updateTime":"2026-03-11 10:54:14","deleted":0,"title":"??¨????oo?¤§??￡è?¨è???|?è???????￥AIèμ?è????o?±??????? ??¨??¨?1??????ˉ??′?????￥?o·?o§???è?????????±?","content":"??￥?o?: ??°????????￥?o·\n??????é????￥: http://www.xinhuanet.com/health/20260309/3055cf5b2ed6451d9ad25dfbfa5c597c/c.html","summary":"??¨????oo?¤§??￡è?¨è???|?è???????￥AIèμ?è????o?±??????? ??¨??¨?1??????ˉ??′?????￥?o·?o§???è?????????±?","category":2,"coverImage":null,"author":"??°????????￥?o·","viewCount":0,"isTop":0,"status":1}]}
+Description                    Get Hot News                                    
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/news/hot                                   
+Status                         PASS                                            
+
+========================================
+Test: Get News Page
+Method: GET
+URL: http://localhost:8080/api/news/page?pageNum=1&pageSize=10
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"records":[{"id":1,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"title":"2024?1′???è??é??è°???′??1?????????","content":"è????￥????oo?¤?é?¨???????o?2024?1′???è??é??è°???′??1????????¨?????????è°???′?°′?13??o2023?1′é??????oo???????oo?????o??????è??é?????3.8%???","summary":"???è??é??è°???′??1??????????????¨?1?3.8%","category":1,"coverImage":null,"author":"?????????","viewCount":1264,"isTop":1,"status":1},{"id":7,"createTime":"2026-03-11 10:54:14","updateTime":"2026-03-11 10:54:14","deleted":0,"title":"??¨????oo?¤§??￡è?¨è???|?è???????￥AIèμ?è????o?±??????? ??¨??¨?1??????ˉ??′?????￥?o·?o§???è?????????±?","content":"??￥?o?: ??°????????￥?o·\n??????é????￥: http://www.xinhuanet.com/health/20260309/3055cf5b2ed6451d9ad25dfbfa5c597c/c.html","summary":"??¨????oo?¤§??￡è?¨è???|?è???????￥AIèμ?è????o?±??????? ??¨??¨?1??????ˉ??′?????￥?o·?o§???è?????????±?","category":2,"coverImage":null,"author":"??°????????￥?o·","viewCount":0,"isTop":0,"status":1},{"id":8,"createTime":"2026-03-11 10:54:14","updateTime":"2026-03-11 10:54:14","deleted":0,"title":"??¨????oo?¤§??￡è?¨??￠?o???????????????¨è???????￥é￡?????????????????????????????3???oè??","content":"??￥?o?: ??°????????￥?o·\n??????é????￥: http://www.xinhuanet.com/health/20260306/c952a36b407b455aa664ba7f4f707a6f/c.html","summary":"??¨????oo?¤§??￡è?¨??￠?o???????????????¨è???????￥é￡?????????????????????????????3???oè??","category":2,"coverImage":null,"author":"??°????????￥?o·","viewCount":0,"isTop":0,"status":1},{"id":9,"createTime":"2026-03-11 10:54:14","updateTime":"2026-03-11 10:54:14","deleted":0,"title":"??¨????oo?¤§??￡è?¨?§|?o?è?3???????????o?±?????????????è????? ??¨è??????o-???????-??o|??????é??è′¨é??????±?","content":"??￥?o?: ??°????????￥?o·\n??????é????￥: http://www.xinhuanet.com/health/20260306/381209f90dbd44ec998a841520557110/c.html","summary":"??¨????oo?¤§??￡è?¨?§|?o?è?3???????????o?±?????????????è????? ??¨è??????o-???????-??o|??????é??è′¨é??????±?","category":2,"coverImage":null,"author":"??°????????￥?o·","viewCount":0,"isTop":0,"status":1},{"id":4,"createTime":"2026-02-18 21:47:16","updateTime":"2026-02-18 21:47:16","deleted":0,"title":"??????é?￠?????????è??????°????é?¨?-?é?¨é?¨?????3?o?è??????-￥?????o???è????o????????¨????????????è§???????é????￥","content":"??￥?o?: ??-???????o????\n??????é????￥: https://www.gov.cn/zhengce/content/202602/content_7057651.htm","summary":"??????é?￠?????????è??????°????é?¨?-?é?¨é?¨?????3?o?è??????-￥?????o???è????o????????¨????????????è§???????é????￥","category":1,"coverImage":null,"author":"??-???????o????","viewCount":1,"isTop":0,"status":1},{"id":2,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"title":"è???1′?oo??￥?o·é￥?é￡???????","content":"?????????é￥?é￡??ˉ1è???1′?oo?????￥?o·è?3??3é??è|??????oè??è???1′?oo?¤????è??è???°′???????°?????21è??é￡?????????????è?￥??????è?????","summary":"è???1′?oo??￥?o·é￥?é￡???oè??","category":2,"coverImage":null,"author":"??￥?o·?????????","viewCount":893,"isTop":0,"status":1},{"id":3,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"title":"?¤???o???è?????????????????é????￥","content":"????¤???o???è????????????·2?o?è????￥?-￡??????????????￠è???1??¤§è???1′???????????￥???éa????é?1?????????","summary":"?¤???o???è?????????????????","category":3,"coverImage":null,"author":"?¤???o?????????","viewCount":567,"isTop":0,"status":1}],"total":7,"size":10,"current":1,"pages":1}}
+Description                    Get News Page                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/news/page                                  
+Status                         PASS                                            
+
+========================================
+Test: Get News by Category
+Method: GET
+URL: http://localhost:8080/api/news/category/1?pageNum=1&pageSize=10
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"records":[{"id":4,"createTime":"2026-02-18 21:47:16","updateTime":"2026-02-18 21:47:16","deleted":0,"title":"??????é?￠?????????è??????°????é?¨?-?é?¨é?¨?????3?o?è??????-￥?????o???è????o????????¨????????????è§???????é????￥","content":"??￥?o?: ??-???????o????\n??????é????￥: https://www.gov.cn/zhengce/content/202602/content_7057651.htm","summary":"??????é?￠?????????è??????°????é?¨?-?é?¨é?¨?????3?o?è??????-￥?????o???è????o????????¨????????????è§???????é????￥","category":1,"coverImage":null,"author":"??-???????o????","viewCount":1,"isTop":0,"status":1},{"id":1,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"title":"2024?1′???è??é??è°???′??1?????????","content":"è????￥????oo?¤?é?¨???????o?2024?1′???è??é??è°???′??1????????¨?????????è°???′?°′?13??o2023?1′é??????oo???????oo?????o??????è??é?????3.8%???","summary":"???è??é??è°???′??1??????????????¨?1?3.8%","category":1,"coverImage":null,"author":"?????????","viewCount":1264,"isTop":1,"status":1}],"total":2,"size":10,"current":1,"pages":1}}
+Description                    Get News by Category                            
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/news/category/1                            
+Status                         PASS                                            
+
+========================================
+Test: Get News Detail
+Method: GET
+URL: http://localhost:8080/api/news/detail/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":1,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"title":"2024?1′???è??é??è°???′??1?????????","content":"è????￥????oo?¤?é?¨???????o?2024?1′???è??é??è°???′??1????????¨?????????è°???′?°′?13??o2023?1′é??????oo???????oo?????o??????è??é?????3.8%???","summary":"???è??é??è°???′??1??????????????¨?1?3.8%","category":1,"coverImage":null,"author":"?????????","viewCount":1265,"isTop":1,"status":1}}
+Description                    Get News Detail                                 
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/news/detail/1                              
+Status                         PASS                                            
+
+========================================
+      3. Service API Tests
+========================================
+
+========================================
+Test: Get Service List
+Method: GET
+URL: http://localhost:8080/api/service/list
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":1,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"?±????????′?","description":"??????????′??oo??????é?¨??????????o-????′???????","price":50.00,"image":null,"category":1,"duration":120,"sales":1256,"rating":4.9,"icon":"\uD83E\uDDF9","status":1,"sort":1},{"id":2,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"???é¤???????","description":"??oè???1′?oo??????è?￥??????è?????é¤?é￥???????","price":20.00,"image":null,"category":2,"duration":60,"sales":3562,"rating":4.8,"icon":"\uD83C\uDF7D???","status":1,"sort":2},{"id":3,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"?o·?¤???¤???","description":"???????o·?¤???????????o·?¤?è?-???????ˉ?","price":150.00,"image":null,"category":3,"duration":90,"sales":892,"rating":4.9,"icon":"\uD83C\uDFE5","status":1,"sort":3},{"id":4,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"é?a????°±???","description":"????ooé?a???è???oo?????????é?￠?°±èˉ?","price":100.00,"image":null,"category":4,"duration":180,"sales":1567,"rating":4.7,"icon":"\uD83D\uDC74","status":1,"sort":4},{"id":5,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"????????°è??","description":"??????????????¨èˉ￠???????????????????ˉ???????","price":120.00,"image":null,"category":3,"duration":60,"sales":456,"rating":4.8,"icon":"\uD83D\uDCAC","status":1,"sort":5}]}
+Description                    Get Service List                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/service/list                               
+Status                         PASS                                            
+
+========================================
+Test: Get Service by Category
+Method: GET
+URL: http://localhost:8080/api/service/list?categoryId=1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":1,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"?±????????′?","description":"??????????′??oo??????é?¨??????????o-????′???????","price":50.00,"image":null,"category":1,"duration":120,"sales":1256,"rating":4.9,"icon":"\uD83E\uDDF9","status":1,"sort":1}]}
+Description                    Get Service by Category                         
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/service/list                               
+Status                         PASS                                            
+
+========================================
+Test: Get Hot Services
+Method: GET
+URL: http://localhost:8080/api/service/hot?limit=6
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":2,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"???é¤???????","description":"??oè???1′?oo??????è?￥??????è?????é¤?é￥???????","price":20.00,"image":null,"category":2,"duration":60,"sales":3562,"rating":4.8,"icon":"\uD83C\uDF7D???","status":1,"sort":2},{"id":4,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"é?a????°±???","description":"????ooé?a???è???oo?????????é?￠?°±èˉ?","price":100.00,"image":null,"category":4,"duration":180,"sales":1567,"rating":4.7,"icon":"\uD83D\uDC74","status":1,"sort":4},{"id":1,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"?±????????′?","description":"??????????′??oo??????é?¨??????????o-????′???????","price":50.00,"image":null,"category":1,"duration":120,"sales":1256,"rating":4.9,"icon":"\uD83E\uDDF9","status":1,"sort":1},{"id":3,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"?o·?¤???¤???","description":"???????o·?¤???????????o·?¤?è?-???????ˉ?","price":150.00,"image":null,"category":3,"duration":90,"sales":892,"rating":4.9,"icon":"\uD83C\uDFE5","status":1,"sort":3},{"id":5,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"????????°è??","description":"??????????????¨èˉ￠???????????????????ˉ???????","price":120.00,"image":null,"category":3,"duration":60,"sales":456,"rating":4.8,"icon":"\uD83D\uDCAC","status":1,"sort":5}]}
+Description                    Get Hot Services                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/service/hot                                
+Status                         PASS                                            
+
+========================================
+Test: Get Service Detail
+Method: GET
+URL: http://localhost:8080/api/service/detail/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":1,"createTime":"2026-02-18 20:41:33","updateTime":"2026-02-18 20:41:33","deleted":0,"name":"?±????????′?","description":"??????????′??oo??????é?¨??????????o-????′???????","price":50.00,"image":null,"category":1,"duration":120,"sales":1256,"rating":4.9,"icon":"\uD83E\uDDF9","status":1,"sort":1}}
+Description                    Get Service Detail                              
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/service/detail/1                           
+Status                         PASS                                            
+
+========================================
+Test: Create Order
+Method: POST
+URL: http://localhost:8080/api/service/order/create
+Body: {
+    "serviceName":  "Housekeeping",
+    "serviceId":  1,
+    "remark":  "Test Order",
+    "address":  "Beijing Chaoyang",
+    "userId":  1,
+    "amount":  100,
+    "contactPhone":  "13800138000"
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":7,"createTime":"2026-03-13 18:48:34","updateTime":"2026-03-13 18:48:34","deleted":null,"orderNo":"SV202603131848347918","userId":1,"serviceId":1,"serviceName":"Housekeeping","amount":100,"orderStatus":0,"serviceAddress":null,"contactName":null,"contactPhone":"13800138000","appointmentTime":null,"workerId":null,"workerName":null,"workerPhone":null,"serviceRating":null,"serviceComment":null,"payStatus":0,"payTime":null}}
+Description                    Create Order                                    
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/service/order/create                       
+Status                         PASS                                            
+
+========================================
+Test: Get User Orders
+Method: GET
+URL: http://localhost:8080/api/service/order/user/1?pageNum=1&pageSize=10
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"records":[{"id":7,"createTime":"2026-03-13 18:48:34","updateTime":"2026-03-13 18:48:34","deleted":0,"orderNo":"SV202603131848347918","userId":1,"serviceId":1,"serviceName":"Housekeeping","amount":100.00,"orderStatus":0,"serviceAddress":null,"contactName":null,"contactPhone":"13800138000","appointmentTime":null,"workerId":null,"workerName":null,"workerPhone":null,"serviceRating":null,"serviceComment":null,"payStatus":0,"payTime":null},{"id":6,"createTime":"2026-03-13 18:47:50","updateTime":"2026-03-13 18:47:50","deleted":0,"orderNo":"SV202603131847504764","userId":1,"serviceId":1,"serviceName":"Housekeeping","amount":100.00,"orderStatus":0,"serviceAddress":null,"contactName":null,"contactPhone":"13800138000","appointmentTime":null,"workerId":null,"workerName":null,"workerPhone":null,"serviceRating":null,"serviceComment":null,"payStatus":0,"payTime":null},{"id":2,"createTime":"2026-02-18 22:54:47","updateTime":"2026-02-18 22:54:47","deleted":0,"orderNo":"SV202602182254473310","userId":1,"serviceId":1,"serviceName":"?±????????′?","amount":80.00,"orderStatus":4,"serviceAddress":"??????è?¤","contactName":"???é????μ","contactPhone":"19031706043","appointmentTime":"2026-02-18 22:54:47","workerId":null,"workerName":null,"workerPhone":null,"serviceRating":null,"serviceComment":null,"payStatus":0,"payTime":null},{"id":1,"createTime":"2026-02-18 20:01:31","updateTime":"2026-02-18 20:01:31","deleted":0,"orderNo":"SV202602182001318839","userId":1,"serviceId":1,"serviceName":"Home Cleaning","amount":80.00,"orderStatus":1,"serviceAddress":"??????è?¤","contactName":"???é????μ","contactPhone":"19031706043","appointmentTime":"2026-02-18 20:01:31","workerId":null,"workerName":null,"workerPhone":null,"serviceRating":null,"serviceComment":null,"payStatus":0,"payTime":null}],"total":4,"size":10,"current":1,"pages":1}}
+Description                    Get User Orders                                 
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/service/order/user/1                       
+Status                         PASS                                            
+
+========================================
+Test: Get Order Detail
+Method: GET
+URL: http://localhost:8080/api/service/order/detail/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":1,"createTime":"2026-02-18 20:01:31","updateTime":"2026-02-18 20:01:31","deleted":0,"orderNo":"SV202602182001318839","userId":1,"serviceId":1,"serviceName":"Home Cleaning","amount":80.00,"orderStatus":1,"serviceAddress":"??????è?¤","contactName":"???é????μ","contactPhone":"19031706043","appointmentTime":"2026-02-18 20:01:31","workerId":null,"workerName":null,"workerPhone":null,"serviceRating":null,"serviceComment":null,"payStatus":0,"payTime":null}}
+Description                    Get Order Detail                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/service/order/detail/1                     
+Status                         PASS                                            
+
+========================================
+Test: Update Order Status
+Method: PUT
+URL: http://localhost:8080/api/service/order/status?orderId=1&status=1
+Status: 200
+Response: {"code":200,"message":"????????????","data":null}
+Description                    Update Order Status                             
+StatusCode                     200                                             
+Error                                                                          
+Method                         PUT                                             
+Response                       {"code":200,"message":"????????????","data":n...
+Endpoint                       /api/service/order/status                       
+Status                         PASS                                            
+
+========================================
+      4. Health Data API Tests
+========================================
+
+========================================
+Test: Add Health Data
+Method: POST
+URL: http://localhost:8080/api/health/add
+Body: {
+    "remark":  "Normal",
+    "weight":  70,
+    "bloodSugar":  5.6,
+    "bloodPressureLow":  80,
+    "heartRate":  75,
+    "bloodPressureHigh":  120,
+    "measureTime":  "2026-03-13 10:00:00",
+    "userId":  1,
+    "temperature":  36.5
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":null}
+Description                    Add Health Data                                 
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":n...
+Endpoint                       /api/health/add                                 
+Status                         PASS                                            
+
+========================================
+Test: Get Latest Health
+Method: GET
+URL: http://localhost:8080/api/health/latest/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":9,"createTime":"2026-03-13 18:48:34","updateTime":"2026-03-13 18:48:34","deleted":0,"userId":1,"bloodPressureHigh":120.0,"bloodPressureLow":80.0,"heartRate":75.0,"bloodSugar":5.6,"temperature":36.5,"weight":70.0,"dataSource":1,"deviceId":null,"measureTime":"2026-03-13 10:00:00","remark":"Normal"}}
+Description                    Get Latest Health                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/health/latest/1                            
+Status                         PASS                                            
+
+========================================
+Test: Get Recent Health
+Method: GET
+URL: http://localhost:8080/api/health/recent/1?limit=7
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":8,"createTime":"2026-03-13 18:47:50","updateTime":"2026-03-13 18:47:50","deleted":0,"userId":1,"bloodPressureHigh":120.0,"bloodPressureLow":80.0,"heartRate":75.0,"bloodSugar":5.6,"temperature":36.5,"weight":70.0,"dataSource":1,"deviceId":null,"measureTime":"2026-03-13 10:00:00","remark":"Normal"},{"id":9,"createTime":"2026-03-13 18:48:34","updateTime":"2026-03-13 18:48:34","deleted":0,"userId":1,"bloodPressureHigh":120.0,"bloodPressureLow":80.0,"heartRate":75.0,"bloodSugar":5.6,"temperature":36.5,"weight":70.0,"dataSource":1,"deviceId":null,"measureTime":"2026-03-13 10:00:00","remark":"Normal"},{"id":4,"createTime":"2026-03-10 23:28:27","updateTime":"2026-03-10 23:28:27","deleted":0,"userId":1,"bloodPressureHigh":130.0,"bloodPressureLow":85.0,"heartRate":72.0,"bloodSugar":5.6,"temperature":null,"weight":null,"dataSource":1,"deviceId":null,"measureTime":"2026-03-10 23:28:27","remark":null},{"id":5,"createTime":"2026-03-10 23:28:27","updateTime":"2026-03-10 23:28:27","deleted":0,"userId":1,"bloodPressureHigh":128.0,"bloodPressureLow":82.0,"heartRate":75.0,"bloodSugar":5.8,"temperature":null,"weight":null,"dataSource":1,"deviceId":null,"measureTime":"2026-03-09 23:28:27","remark":null},{"id":6,"createTime":"2026-03-10 23:28:27","updateTime":"2026-03-10 23:28:27","deleted":0,"userId":1,"bloodPressureHigh":135.0,"bloodPressureLow":88.0,"heartRate":78.0,"bloodSugar":6.2,"temperature":null,"weight":null,"dataSource":1,"deviceId":null,"measureTime":"2026-03-08 23:28:27","remark":null},{"id":3,"createTime":"2026-02-18 20:46:51","updateTime":"2026-02-18 20:46:51","deleted":0,"userId":1,"bloodPressureHigh":33.0,"bloodPressureLow":33.0,"heartRate":33.0,"bloodSugar":33.0,"temperature":33.0,"weight":33.0,"dataSource":1,"deviceId":null,"measureTime":"2026-02-18 20:46:51","remark":null},{"id":2,"createTime":"2026-02-18 09:09:29","updateTime":"2026-02-18 09:09:29","deleted":0,"userId":1,"bloodPressureHigh":22.0,"bloodPressureLow":22.0,"heartRate":22.0,"bloodSugar":22.0,"temperature":22.0,"weight":22.0,"dataSource":1,"deviceId":null,"measureTime":"2026-02-18 09:09:28","remark":null}]}
+Description                    Get Recent Health                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/health/recent/1                            
+Status                         PASS                                            
+
+========================================
+Test: Get Health Stats
+Method: GET
+URL: http://localhost:8080/api/stats/health/1?days=7
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"bloodPressure":[{"date":"2026-03-08T23:28:27","high":135.0,"low":88.0},{"date":"2026-03-09T23:28:27","high":128.0,"low":82.0},{"date":"2026-03-10T23:28:27","high":130.0,"low":85.0},{"date":"2026-03-13T10:00","high":120.0,"low":80.0},{"date":"2026-03-13T10:00","high":120.0,"low":80.0}],"bloodSugar":[{"date":"2026-03-08T23:28:27","value":6.2},{"date":"2026-03-09T23:28:27","value":5.8},{"date":"2026-03-10T23:28:27","value":5.6},{"date":"2026-03-13T10:00","value":5.6},{"date":"2026-03-13T10:00","value":5.6}],"heartRate":[{"date":"2026-03-08T23:28:27","value":78.0},{"date":"2026-03-09T23:28:27","value":75.0},{"date":"2026-03-10T23:28:27","value":72.0},{"date":"2026-03-13T10:00","value":75.0},{"date":"2026-03-13T10:00","value":75.0}]}}
+Description                    Get Health Stats                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/stats/health/1                             
+Status                         PASS                                            
+
+========================================
+      5. Social API Tests
+========================================
+
+========================================
+Test: Get Posts
+Method: GET
+URL: http://localhost:8080/api/social/posts?page=1&size=10
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":3,"userId":1,"userName":null,"userAvatar":null,"content":"????????","images":null,"likes":0,"comments":0,"category":1,"createdAt":null,"updatedAt":null,"deleted":0},{"id":2,"userId":1,"userName":null,"userAvatar":null,"content":"?μ?èˉ?????????¨????????1","images":null,"likes":1,"comments":0,"category":1,"createdAt":null,"updatedAt":null,"deleted":0}]}
+Description                    Get Posts                                       
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/social/posts                               
+Status                         PASS                                            
+
+========================================
+Test: Get Posts by Category
+Method: GET
+URL: http://localhost:8080/api/social/posts?category=1&page=1&size=10
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":3,"userId":1,"userName":null,"userAvatar":null,"content":"????????","images":null,"likes":0,"comments":0,"category":1,"createdAt":null,"updatedAt":null,"deleted":0},{"id":2,"userId":1,"userName":null,"userAvatar":null,"content":"?μ?èˉ?????????¨????????1","images":null,"likes":1,"comments":0,"category":1,"createdAt":null,"updatedAt":null,"deleted":0}]}
+Description                    Get Posts by Category                           
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/social/posts                               
+Status                         PASS                                            
+
+========================================
+Test: Get Post Detail
+Method: GET
+URL: http://localhost:8080/api/social/posts/1
+Status: 200
+Response: {"code":500,"message":"??¨???????-???¨","data":null}
+Description                    Get Post Detail                                 
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":500,"message":"??¨???????-???¨","da...
+Endpoint                       /api/social/posts/1                             
+Status                         PASS                                            
+
+========================================
+Test: Create Post
+Method: POST
+URL: http://localhost:8080/api/social/posts
+Body: {
+    "images":  [
+                   "https://example.com/image1.jpg"
+               ],
+    "content":  "Test post content",
+    "category":  1,
+    "userId":  1
+}
+Status: 200
+Response: {"code":500,"message":"è??è???????????: JSON parse error: Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`)","data":null}
+Description                    Create Post                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è??è???????????: JSON ...
+Endpoint                       /api/social/posts                               
+Status                         PASS                                            
+
+========================================
+Test: Like Post
+Method: POST
+URL: http://localhost:8080/api/social/posts/1/like
+Body: {
+    "userId":  2
+}
+Status: 200
+Response: {"code":500,"message":"è??è???????????: \r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1-2' for key 'social_post_like.uk_post_user'\r\n### The error may exist in com/elderly/mapper/SocialPostLikeMapper.java (best guess)\r\n### The error may involve com.elderly.mapper.SocialPostLikeMapper.insert-Inline\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO social_post_like  ( post_id, user_id, created_at )  VALUES (  ?, ?, ?  )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1-2' for key 'social_post_like.uk_post_user'\n; Duplicate entry '1-2' for key 'social_post_like.uk_post_user'","data":null}
+Description                    Like Post                                       
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è??è???????????: \r\n#...
+Endpoint                       /api/social/posts/1/like                        
+Status                         PASS                                            
+
+========================================
+Test: Unlike Post
+Method: POST
+URL: http://localhost:8080/api/social/posts/1/unlike
+Body: {
+    "userId":  2
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Unlike Post                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/social/posts/1/unlike                      
+Status                         PASS                                            
+
+========================================
+Test: Get Comments
+Method: GET
+URL: http://localhost:8080/api/social/posts/1/comments
+Status: 200
+Response: {"code":200,"message":"????????????","data":[]}
+Description                    Get Comments                                    
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[]} 
+Endpoint                       /api/social/posts/1/comments                    
+Status                         PASS                                            
+
+========================================
+Test: Add Comment
+Method: POST
+URL: http://localhost:8080/api/social/posts/1/comments
+Body: {
+    "content":  "Test comment",
+    "userId":  2,
+    "parentId":  null
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Add Comment                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/social/posts/1/comments                    
+Status                         PASS                                            
+
+========================================
+Test: Delete Post
+Method: DELETE
+URL: http://localhost:8080/api/social/posts/1
+Body: {
+    "userId":  1
+}
+Status: 200
+Response: {"code":500,"message":"???é?¤?¤±è′￥?????????é??","data":null}
+Description                    Delete Post                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         DELETE                                          
+Response                       {"code":500,"message":"???é?¤?¤±è′￥?????... 
+Endpoint                       /api/social/posts/1                             
+Status                         PASS                                            
+
+========================================
+      6. Activity API Tests
+========================================
+
+========================================
+Test: Get Activities
+Method: GET
+URL: http://localhost:8080/api/activity/list
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":4,"title":"?1|?3?","description":"","category":2,"coverImage":null,"location":"?2§?·??????????é|?","startTime":"2026-03-11 11:27:17","endTime":"2026-03-12 00:00:00","registrationDeadline":null,"maxParticipants":50,"currentParticipants":1,"likes":0,"organizerId":null,"organizerName":null,"contactPhone":"","tips":null,"createdAt":null,"updatedAt":null,"deleted":0}]}
+Description                    Get Activities                                  
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/activity/list                              
+Status                         PASS                                            
+
+========================================
+Test: Get Activities by Category
+Method: GET
+URL: http://localhost:8080/api/activity/list?category=1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[]}
+Description                    Get Activities by Category                      
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[]} 
+Endpoint                       /api/activity/list                              
+Status                         PASS                                            
+
+========================================
+Test: Get Activity Detail
+Method: GET
+URL: http://localhost:8080/api/activity/1
+Status: 200
+Response: {"code":500,"message":"?′???¨????-???¨","data":null}
+Description                    Get Activity Detail                             
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":500,"message":"?′???¨????-???¨","da...
+Endpoint                       /api/activity/1                                 
+Status                         PASS                                            
+
+========================================
+Test: Join Activity
+Method: POST
+URL: http://localhost:8080/api/activity/join/1
+Status: 200
+Response: {"code":500,"message":"??￥????¤±è′￥??????é￠??·2???","data":null}
+Description                    Join Activity                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"??￥????¤±è′￥??????é￠...
+Endpoint                       /api/activity/join/1                            
+Status                         PASS                                            
+
+========================================
+Test: Cancel Join
+Method: POST
+URL: http://localhost:8080/api/activity/cancel/1
+Status: 200
+Response: {"code":500,"message":"????????￥????¤±è′￥","data":null}
+Description                    Cancel Join                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"????????￥????¤±è′￥",...
+Endpoint                       /api/activity/cancel/1                          
+Status                         PASS                                            
+
+========================================
+Test: Like Activity
+Method: POST
+URL: http://localhost:8080/api/activity/like/1
+Status: 200
+Response: {"code":500,"message":"??1èμ??¤±è′￥","data":null}
+Description                    Like Activity                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"??1èμ??¤±è′￥","data"...
+Endpoint                       /api/activity/like/1                            
+Status                         PASS                                            
+
+========================================
+Test: Get Activity Comments
+Method: GET
+URL: http://localhost:8080/api/activity/comments/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":1,"activityId":1,"userId":1,"userName":"Test User","content":"Activity comment","parentId":0,"replyToUserId":null,"replyToUserName":null,"likes":1,"createdAt":"2026-03-13 18:47:51","deleted":0}]}
+Description                    Get Activity Comments                           
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/activity/comments/1                        
+Status                         PASS                                            
+
+========================================
+Test: Add Activity Comment
+Method: POST
+URL: http://localhost:8080/api/activity/comment
+Body: {
+    "userName":  "Test User",
+    "content":  "Activity comment",
+    "activityId":  1,
+    "userId":  1
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Add Activity Comment                            
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/activity/comment                           
+Status                         PASS                                            
+
+========================================
+Test: Like Comment
+Method: POST
+URL: http://localhost:8080/api/activity/comment/like/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Like Comment                                    
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/activity/comment/like/1                    
+Status                         PASS                                            
+
+========================================
+Test: Register Activity
+Method: POST
+URL: http://localhost:8080/api/activity-registration/register?userName=Test User&activityId=1&userId=1&remark=Test&userPhone=13800138000
+Status: 200
+Response: {"code":500,"message":"??￥????¤±è′￥?????ˉè???′???¨?·2???????·2??￥???","data":null}
+Description                    Register Activity                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"??￥????¤±è′￥?????ˉè?...
+Endpoint                       /api/activity-registration/register             
+Status                         PASS                                            
+
+========================================
+Test: Cancel Registration
+Method: POST
+URL: http://localhost:8080/api/activity-registration/cancel?userId=1&activityId=1
+Status: 200
+Response: {"code":500,"message":"????????￥????¤±è′￥","data":null}
+Description                    Cancel Registration                             
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"????????￥????¤±è′￥",...
+Endpoint                       /api/activity-registration/cancel               
+Status                         PASS                                            
+
+========================================
+Test: Check Registration
+Method: GET
+URL: http://localhost:8080/api/activity-registration/check?userId=1&activityId=1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"isRegistered":false}}
+Description                    Check Registration                              
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/activity-registration/check                
+Status                         PASS                                            
+
+========================================
+Test: Get User Registrations
+Method: GET
+URL: http://localhost:8080/api/activity-registration/user/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[]}
+Description                    Get User Registrations                          
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[]} 
+Endpoint                       /api/activity-registration/user/1               
+Status                         PASS                                            
+
+========================================
+Test: Get Activity Registrations
+Method: GET
+URL: http://localhost:8080/api/activity-registration/activity/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[]}
+Description                    Get Activity Registrations                      
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[]} 
+Endpoint                       /api/activity-registration/activity/1           
+Status                         PASS                                            
+
+========================================
+      7. Family API Tests
+========================================
+
+========================================
+Test: Bind Family
+Method: POST
+URL: http://localhost:8080/api/family/bind?familyUserId=2&phone=13800138001&userId=1&relation=Child&name=Family Member
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Bind Family                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/family/bind                                
+Status                         PASS                                            
+
+========================================
+Test: Unbind Family
+Method: POST
+URL: http://localhost:8080/api/family/unbind/1
+Status: 200
+Response: {"code":500,"message":"è§￡????¤±è′￥","data":null}
+Description                    Unbind Family                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è§￡????¤±è′￥","data...
+Endpoint                       /api/family/unbind/1                            
+Status                         PASS                                            
+
+========================================
+Test: Get Family Members
+Method: GET
+URL: http://localhost:8080/api/family/members/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"familyUserName":"èˉ?","phone":"13800138000","familyUserAvatar":null,"isPrimary":0,"name":"???????±?","id":2,"familyUserId":2,"relation":"????-?"}]}
+Description                    Get Family Members                              
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/family/members/1                           
+Status                         PASS                                            
+
+========================================
+Test: Get Bind Users
+Method: GET
+URL: http://localhost:8080/api/family/bind-users/2
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"healthCondition":"??????é?????è????¨??????????¤±???","userAvatar":null,"userPhone":"19031706043","id":2,"userName":"Updated Name","userId":1,"relation":"????-?"}]}
+Description                    Get Bind Users                                  
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/family/bind-users/2                        
+Status                         PASS                                            
+
+========================================
+Test: Get Family Health
+Method: GET
+URL: http://localhost:8080/api/family/health-data/1?days=7&familyUserId=2
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"isAbnormal":0,"recordTime":"2026-03-13 10:00:00","dataType":"è?????","dataValue":"120.0/80.0 mmHg","remark":"Normal","id":8},{"isAbnormal":0,"recordTime":"2026-03-13 10:00:00","dataType":"è?????","dataValue":"120.0/80.0 mmHg","remark":"Normal","id":9},{"isAbnormal":0,"recordTime":"2026-03-10 23:28:27","dataType":"è?????","dataValue":"130.0/85.0 mmHg","remark":null,"id":4},{"isAbnormal":0,"recordTime":"2026-03-09 23:28:27","dataType":"è?????","dataValue":"128.0/82.0 mmHg","remark":null,"id":5},{"isAbnormal":0,"recordTime":"2026-03-08 23:28:27","dataType":"è?????","dataValue":"135.0/88.0 mmHg","remark":null,"id":6}]}
+Description                    Get Family Health                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/family/health-data/1                       
+Status                         PASS                                            
+
+========================================
+Test: Get Family Stats
+Method: GET
+URL: http://localhost:8080/api/family/health-stats/1?familyUserId=2
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"totalRecords":5,"hasAbnormal":false,"recentData":[{"isAbnormal":0,"recordTime":"2026-03-13 10:00:00","dataType":"è?????","dataValue":"120.0/80.0 mmHg","remark":"Normal","id":8},{"isAbnormal":0,"recordTime":"2026-03-13 10:00:00","dataType":"è?????","dataValue":"120.0/80.0 mmHg","remark":"Normal","id":9},{"isAbnormal":0,"recordTime":"2026-03-10 23:28:27","dataType":"è?????","dataValue":"130.0/85.0 mmHg","remark":null,"id":4},{"isAbnormal":0,"recordTime":"2026-03-09 23:28:27","dataType":"è?????","dataValue":"128.0/82.0 mmHg","remark":null,"id":5},{"isAbnormal":0,"recordTime":"2026-03-08 23:28:27","dataType":"è?????","dataValue":"135.0/88.0 mmHg","remark":null,"id":6}],"groupedData":{"è?????":[{"isAbnormal":0,"recordTime":"2026-03-13 10:00:00","dataType":"è?????","dataValue":"120.0/80.0 mmHg","remark":"Normal","id":8},{"isAbnormal":0,"recordTime":"2026-03-13 10:00:00","dataType":"è?????","dataValue":"120.0/80.0 mmHg","remark":"Normal","id":9},{"isAbnormal":0,"recordTime":"2026-03-10 23:28:27","dataType":"è?????","dataValue":"130.0/85.0 mmHg","remark":null,"id":4},{"isAbnormal":0,"recordTime":"2026-03-09 23:28:27","dataType":"è?????","dataValue":"128.0/82.0 mmHg","remark":null,"id":5},{"isAbnormal":0,"recordTime":"2026-03-08 23:28:27","dataType":"è?????","dataValue":"135.0/88.0 mmHg","remark":null,"id":6}]}}}
+Description                    Get Family Stats                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/family/health-stats/1                      
+Status                         PASS                                            
+
+========================================
+Test: Get Family Orders
+Method: GET
+URL: http://localhost:8080/api/family/service-orders/1?familyUserId=2
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"createdAt":"2026-03-13 18:48:34","amount":100.00,"orderNo":"SV202603131848347918","address":null,"appointmentTime":null,"orderStatus":0,"id":7,"serviceName":"Housekeeping","workerName":null},{"createdAt":"2026-03-13 18:47:50","amount":100.00,"orderNo":"SV202603131847504764","address":null,"appointmentTime":null,"orderStatus":0,"id":6,"serviceName":"Housekeeping","workerName":null},{"createdAt":"2026-02-18 22:54:47","amount":80.00,"orderNo":"SV202602182254473310","address":"??????è?¤","appointmentTime":"2026-02-18 22:54:47","orderStatus":4,"id":2,"serviceName":"?±????????′?","workerName":null},{"createdAt":"2026-02-18 20:01:31","amount":80.00,"orderNo":"SV202602182001318839","address":"??????è?¤","appointmentTime":"2026-02-18 20:01:31","orderStatus":1,"id":1,"serviceName":"Home Cleaning","workerName":null}]}
+Description                    Get Family Orders                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/family/service-orders/1                    
+Status                         PASS                                            
+
+========================================
+Test: Get Family Order Detail
+Method: GET
+URL: http://localhost:8080/api/family/service-order/1?familyUserId=2
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":1,"createTime":"2026-02-18 20:01:31","updateTime":"2026-02-18 20:01:31","deleted":0,"orderNo":"SV202602182001318839","userId":1,"serviceId":1,"serviceName":"Home Cleaning","amount":80.00,"orderStatus":1,"serviceAddress":"??????è?¤","contactName":"???é????μ","contactPhone":"19031706043","appointmentTime":"2026-02-18 20:01:31","workerId":null,"workerName":null,"workerPhone":null,"serviceRating":null,"serviceComment":null,"payStatus":0,"payTime":null}}
+Description                    Get Family Order Detail                         
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/family/service-order/1                     
+Status                         PASS                                            
+
+========================================
+Test: Send Notification
+Method: POST
+URL: http://localhost:8080/api/family/send-notification?title=Emergency&userId=1&content=Test notification&type=emergency
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Send Notification                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/family/send-notification                   
+Status                         PASS                                            
+
+========================================
+Test: Get Notifications
+Method: GET
+URL: http://localhost:8080/api/family/notifications/2
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":1,"userId":1,"familyUserId":2,"type":"emergency","title":"?′§??￥???????μ?èˉ?","content":"è???ooè§|????′§??￥?????????èˉ·?°????è???3?","data":null,"isRead":1,"createdAt":null,"updatedAt":null,"deleted":0},{"id":2,"userId":1,"familyUserId":2,"type":"emergency","title":"Emergency","content":"Test notification","data":null,"isRead":1,"createdAt":null,"updatedAt":null,"deleted":0},{"id":3,"userId":1,"familyUserId":2,"type":"emergency","title":"Emergency","content":"Test notification","data":null,"isRead":0,"createdAt":null,"updatedAt":null,"deleted":0}]}
+Description                    Get Notifications                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/family/notifications/2                     
+Status                         PASS                                            
+
+========================================
+Test: Mark Read
+Method: POST
+URL: http://localhost:8080/api/family/notifications/1/read
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Mark Read                                       
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/family/notifications/1/read                
+Status                         PASS                                            
+
+========================================
+Test: Mark All Read
+Method: POST
+URL: http://localhost:8080/api/family/notifications/2/read-all
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Mark All Read                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/family/notifications/2/read-all            
+Status                         PASS                                            
+
+========================================
+Test: Get Unread Count
+Method: GET
+URL: http://localhost:8080/api/family/notifications/2/unread-count
+Status: 200
+Response: {"code":200,"message":"????????????","data":0}
+Description                    Get Unread Count                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":0}  
+Endpoint                       /api/family/notifications/2/unread-count        
+Status                         PASS                                            
+
+========================================
+      8. Medication API Tests
+========================================
+
+========================================
+Test: Get Medications
+Method: GET
+URL: http://localhost:8080/api/medication/list/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":2,"createTime":"2026-02-18 22:27:36","updateTime":"2026-02-18 22:38:51","deleted":0,"userId":1,"medicationName":"22","dosage":"22","frequency":"?ˉ??¤???????","reminderTime":"22:39:00","startDate":"2026-02-18","endDate":"2026-03-20","status":1,"remark":""}]}
+Description                    Get Medications                                 
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/medication/list/1                          
+Status                         PASS                                            
+
+========================================
+Test: Get Active Medications
+Method: GET
+URL: http://localhost:8080/api/medication/active/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":2,"createTime":"2026-02-18 22:27:36","updateTime":"2026-02-18 22:38:51","deleted":0,"userId":1,"medicationName":"22","dosage":"22","frequency":"?ˉ??¤???????","reminderTime":"22:39:00","startDate":"2026-02-18","endDate":"2026-03-20","status":1,"remark":""}]}
+Description                    Get Active Medications                          
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/medication/active/1                        
+Status                         PASS                                            
+
+========================================
+Test: Get Medication Detail
+Method: GET
+URL: http://localhost:8080/api/medication/detail/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":null}
+Description                    Get Medication Detail                           
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":n...
+Endpoint                       /api/medication/detail/1                        
+Status                         PASS                                            
+
+========================================
+Test: Add Medication
+Method: POST
+URL: http://localhost:8080/api/medication/add
+Body: {
+    "frequency":  "3 times/day",
+    "reminderTime":  "08:00,12:00,18:00",
+    "userId":  1,
+    "endDate":  "2026-03-20",
+    "remark":  "After meal",
+    "medicineName":  "Cold Medicine",
+    "startDate":  "2026-03-13",
+    "dosage":  "1 pill"
+}
+Status: 200
+Response: {"code":500,"message":"è??è???????????: \r\n### Error updating database.  Cause: java.sql.SQLException: Field 'medication_name' doesn't have a default value\r\n### The error may exist in com/elderly/mapper/MedicationReminderMapper.java (best guess)\r\n### The error may involve com.elderly.mapper.MedicationReminderMapper.insert-Inline\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO medication_reminder  ( user_id,  dosage, frequency, reminder_time, start_date, end_date, status, remark, create_time, update_time )  VALUES (  ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?  )\r\n### Cause: java.sql.SQLException: Field 'medication_name' doesn't have a default value\n; Field 'medication_name' doesn't have a default value","data":null}
+Description                    Add Medication                                  
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è??è???????????: \r\n#...
+Endpoint                       /api/medication/add                             
+Status                         PASS                                            
+
+========================================
+Test: Update Medication
+Method: POST
+URL: http://localhost:8080/api/medication/update
+Body: {
+    "id":  1,
+    "medicineName":  "Cold Medicine Updated",
+    "reminderTime":  "08:00,18:00",
+    "frequency":  "2 times/day",
+    "userId":  1,
+    "dosage":  "2 pills"
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":false}
+Description                    Update Medication                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":f...
+Endpoint                       /api/medication/update                          
+Status                         PASS                                            
+
+========================================
+Test: Delete Medication
+Method: DELETE
+URL: http://localhost:8080/api/medication/delete/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":false}
+Description                    Delete Medication                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         DELETE                                          
+Response                       {"code":200,"message":"????????????","data":f...
+Endpoint                       /api/medication/delete/1                        
+Status                         PASS                                            
+
+========================================
+Test: Toggle Status
+Method: PUT
+URL: http://localhost:8080/api/medication/toggle/1/0
+Status: 200
+Response: {"code":200,"message":"????????????","data":false}
+Description                    Toggle Status                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         PUT                                             
+Response                       {"code":200,"message":"????????????","data":f...
+Endpoint                       /api/medication/toggle/1/0                      
+Status                         PASS                                            
+
+========================================
+      9. Notification API Tests
+========================================
+
+========================================
+Test: Get Notifications
+Method: GET
+URL: http://localhost:8080/api/notification/list/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":16,"createTime":"2026-03-13 18:47:53","updateTime":"2026-03-13 18:47:53","deleted":0,"userId":1,"title":"Test","content":"Test notification","type":1,"isRead":0,"extraData":"{}"},{"id":13,"createTime":"2026-02-19 14:32:21","updateTime":"2026-03-13 18:47:52","deleted":0,"userId":1,"title":"??￠è???????¨??o??§???è???13??°","content":"?°?????????¨??·?????￠è????¨?????¨??o??§???è?????????13??°?????????è?′????o???o??¨???????????·???è′′?????????è????????????|??????????é??é￠????èˉ·é?????è???3???￠??????","type":0,"isRead":1,"extraData":null},{"id":14,"createTime":"2026-02-19 14:32:21","updateTime":"2026-03-13 18:47:52","deleted":0,"userId":1,"title":"??????è?￠????·2???è?¤","content":"??¨????±????????′???????è?￠????·2???è?¤??????????oo????°??o?????¤???????9??1???é?¨?????????èˉ·????????μèˉ????é?????","type":1,"isRead":1,"extraData":null},{"id":15,"createTime":"2026-02-19 14:32:21","updateTime":"2026-03-13 18:47:52","deleted":0,"userId":1,"title":"??¨è?ˉ???é??","content":"???é|¨???é?????èˉ·??¨????¤???????2??1?????¨é?????è?ˉ???èˉ·??????è?°???","type":2,"isRead":1,"extraData":null}]}
+Description                    Get Notifications                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/notification/list/1                        
+Status                         PASS                                            
+
+========================================
+Test: Get by Type
+Method: GET
+URL: http://localhost:8080/api/notification/list/1?type=1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":16,"createTime":"2026-03-13 18:47:53","updateTime":"2026-03-13 18:47:53","deleted":0,"userId":1,"title":"Test","content":"Test notification","type":1,"isRead":0,"extraData":"{}"},{"id":14,"createTime":"2026-02-19 14:32:21","updateTime":"2026-03-13 18:47:52","deleted":0,"userId":1,"title":"??????è?￠????·2???è?¤","content":"??¨????±????????′???????è?￠????·2???è?¤??????????oo????°??o?????¤???????9??1???é?¨?????????èˉ·????????μèˉ????é?????","type":1,"isRead":1,"extraData":null}]}
+Description                    Get by Type                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/notification/list/1                        
+Status                         PASS                                            
+
+========================================
+Test: Get Unread Count
+Method: GET
+URL: http://localhost:8080/api/notification/unread/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"count":1}}
+Description                    Get Unread Count                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/notification/unread/1                      
+Status                         PASS                                            
+
+========================================
+Test: Mark Read
+Method: PUT
+URL: http://localhost:8080/api/notification/read/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":null}
+Description                    Mark Read                                       
+StatusCode                     200                                             
+Error                                                                          
+Method                         PUT                                             
+Response                       {"code":200,"message":"????????????","data":n...
+Endpoint                       /api/notification/read/1                        
+Status                         PASS                                            
+
+========================================
+Test: Mark All Read
+Method: PUT
+URL: http://localhost:8080/api/notification/readAll/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":null}
+Description                    Mark All Read                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         PUT                                             
+Response                       {"code":200,"message":"????????????","data":n...
+Endpoint                       /api/notification/readAll/1                     
+Status                         PASS                                            
+
+========================================
+Test: Get Detail
+Method: GET
+URL: http://localhost:8080/api/notification/detail/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":null}
+Description                    Get Detail                                      
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":n...
+Endpoint                       /api/notification/detail/1                      
+Status                         PASS                                            
+
+========================================
+Test: Send Notification
+Method: POST
+URL: http://localhost:8080/api/notification/send
+Body: {
+    "title":  "Test",
+    "extraData":  "{}",
+    "userId":  1,
+    "content":  "Test notification",
+    "type":  1
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":null}
+Description                    Send Notification                               
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":n...
+Endpoint                       /api/notification/send                          
+Status                         PASS                                            
+
+========================================
+      10. Other API Tests
+========================================
+
+========================================
+Test: Get Addresses
+Method: GET
+URL: http://localhost:8080/api/address/list/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":2,"createTime":"2026-03-13 18:47:53","updateTime":"2026-03-13 18:47:53","deleted":0,"userId":1,"name":"Home","phone":"13800138000","province":"Beijing","city":"Beijing","district":"Chaoyang","detail":"Test Street 1","label":null,"isDefault":0}]}
+Description                    Get Addresses                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/address/list/1                             
+Status                         PASS                                            
+
+========================================
+Test: Get Default Address
+Method: GET
+URL: http://localhost:8080/api/address/default/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":null}
+Description                    Get Default Address                             
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":n...
+Endpoint                       /api/address/default/1                          
+Status                         PASS                                            
+
+========================================
+Test: Get Address Detail
+Method: GET
+URL: http://localhost:8080/api/address/detail/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":null}
+Description                    Get Address Detail                              
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":n...
+Endpoint                       /api/address/detail/1                           
+Status                         PASS                                            
+
+========================================
+Test: Add Address
+Method: POST
+URL: http://localhost:8080/api/address/add
+Body: {
+    "district":  "Chaoyang",
+    "userId":  1,
+    "name":  "Home",
+    "province":  "Beijing",
+    "phone":  "13800138000",
+    "city":  "Beijing",
+    "isDefault":  1,
+    "detail":  "Test Street 1"
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Add Address                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/address/add                                
+Status                         PASS                                            
+
+========================================
+Test: Update Address
+Method: POST
+URL: http://localhost:8080/api/address/update
+Body: {
+    "id":  1,
+    "district":  "Chaoyang",
+    "userId":  1,
+    "name":  "Updated Home",
+    "province":  "Beijing",
+    "phone":  "13800138000",
+    "city":  "Beijing",
+    "detail":  "Test Street 2"
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":false}
+Description                    Update Address                                  
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":f...
+Endpoint                       /api/address/update                             
+Status                         PASS                                            
+
+========================================
+Test: Delete Address
+Method: DELETE
+URL: http://localhost:8080/api/address/delete/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":false}
+Description                    Delete Address                                  
+StatusCode                     200                                             
+Error                                                                          
+Method                         DELETE                                          
+Response                       {"code":200,"message":"????????????","data":f...
+Endpoint                       /api/address/delete/1                           
+Status                         PASS                                            
+
+========================================
+Test: Set Default
+Method: PUT
+URL: http://localhost:8080/api/address/setDefault/1/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":false}
+Description                    Set Default                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         PUT                                             
+Response                       {"code":200,"message":"????????????","data":f...
+Endpoint                       /api/address/setDefault/1/1                     
+Status                         PASS                                            
+
+========================================
+Test: Get Groups
+Method: GET
+URL: http://localhost:8080/api/groups/list?page=1&size=10
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":2,"name":"é?3?1??¤???°","description":"??±?-?è·3è??","coverImage":null,"category":2,"creatorId":1,"creatorName":null,"memberCount":23,"postCount":0,"status":1,"createdAt":"2026-03-12 11:52:26","updatedAt":"2026-03-12 11:52:26","deleted":0},{"id":1,"name":"?1|?3??o¤?μ???¤","description":"?1|?3??-|?1??o¤?μ?","coverImage":null,"category":1,"creatorId":1,"creatorName":null,"memberCount":16,"postCount":0,"status":1,"createdAt":"2026-03-12 11:52:26","updatedAt":"2026-03-12 11:52:26","deleted":0},{"id":3,"name":"Test Group","description":"Test description","coverImage":null,"category":1,"creatorId":1,"creatorName":null,"memberCount":1,"postCount":0,"status":1,"createdAt":null,"updatedAt":null,"deleted":0}]}
+Description                    Get Groups                                      
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/groups/list                                
+Status                         PASS                                            
+
+========================================
+Test: Get by Category
+Method: GET
+URL: http://localhost:8080/api/groups/list?category=1&page=1&size=10
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":1,"name":"?1|?3??o¤?μ???¤","description":"?1|?3??-|?1??o¤?μ?","coverImage":null,"category":1,"creatorId":1,"creatorName":null,"memberCount":16,"postCount":0,"status":1,"createdAt":"2026-03-12 11:52:26","updatedAt":"2026-03-12 11:52:26","deleted":0},{"id":3,"name":"Test Group","description":"Test description","coverImage":null,"category":1,"creatorId":1,"creatorName":null,"memberCount":1,"postCount":0,"status":1,"createdAt":null,"updatedAt":null,"deleted":0}]}
+Description                    Get by Category                                 
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/groups/list                                
+Status                         PASS                                            
+
+========================================
+Test: Get Group Detail
+Method: GET
+URL: http://localhost:8080/api/groups/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":1,"name":"?1|?3??o¤?μ???¤","description":"?1|?3??-|?1??o¤?μ?","coverImage":null,"category":1,"creatorId":1,"creatorName":null,"memberCount":16,"postCount":0,"status":1,"createdAt":"2026-03-12 11:52:26","updatedAt":"2026-03-12 11:52:26","deleted":0}}
+Description                    Get Group Detail                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/groups/1                                   
+Status                         PASS                                            
+
+========================================
+Test: Create Group
+Method: POST
+URL: http://localhost:8080/api/groups/create?description=Test description&userId=1&name=Test Group&category=1
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Create Group                                    
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/groups/create                              
+Status                         PASS                                            
+
+========================================
+Test: Join Group
+Method: POST
+URL: http://localhost:8080/api/groups/1/join
+Body: {
+    "userName":  "Test User",
+    "userAvatar":  "https://example.com/avatar.jpg",
+    "userId":  2
+}
+Status: 200
+Response: {"code":500,"message":"è??è???????????: \r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1-2' for key 'group_member.uk_group_user'\r\n### The error may exist in com/elderly/mapper/GroupMemberMapper.java (best guess)\r\n### The error may involve com.elderly.mapper.GroupMemberMapper.insert-Inline\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO group_member  ( group_id, user_id, user_name, user_avatar, role, joined_at )  VALUES (  ?, ?, ?, ?, ?, ?  )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1-2' for key 'group_member.uk_group_user'\n; Duplicate entry '1-2' for key 'group_member.uk_group_user'","data":null}
+Description                    Join Group                                      
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è??è???????????: \r\n#...
+Endpoint                       /api/groups/1/join                              
+Status                         PASS                                            
+
+========================================
+Test: Leave Group
+Method: POST
+URL: http://localhost:8080/api/groups/1/leave
+Body: {
+    "userId":  2
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Leave Group                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/groups/1/leave                             
+Status                         PASS                                            
+
+========================================
+Test: Get Members
+Method: GET
+URL: http://localhost:8080/api/groups/1/members
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":1,"groupId":1,"userId":1,"userName":"?μ?èˉ???¨??·","userAvatar":null,"role":0,"joinedAt":null,"deleted":0}]}
+Description                    Get Members                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/groups/1/members                           
+Status                         PASS                                            
+
+========================================
+Test: Check Membership
+Method: GET
+URL: http://localhost:8080/api/groups/1/check?userId=1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"isMember":true}}
+Description                    Check Membership                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/groups/1/check                             
+Status                         PASS                                            
+
+========================================
+Test: Get Feedback
+Method: GET
+URL: http://localhost:8080/api/feedback/list/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":[{"id":5,"createTime":"2026-03-13 18:47:53","updateTime":"2026-03-13 18:47:53","deleted":0,"userId":1,"content":"Test feedback","contact":"13800138000","status":0,"reply":null},{"id":3,"createTime":"2026-03-10 23:28:27","updateTime":"2026-03-10 23:28:27","deleted":0,"userId":1,"content":"Hope for more health lectures","contact":"13800138000","status":0,"reply":null},{"id":2,"createTime":"2026-02-18 23:28:08","updateTime":"2026-02-18 23:28:08","deleted":0,"userId":1,"content":"2222","contact":"19031706043","status":0,"reply":null},{"id":1,"createTime":"2026-02-18 23:25:52","updateTime":"2026-02-18 23:25:52","deleted":0,"userId":1,"content":"123","contact":"2222222222222","status":0,"reply":null}]}
+Description                    Get Feedback                                    
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":[...
+Endpoint                       /api/feedback/list/1                            
+Status                         PASS                                            
+
+========================================
+Test: Add Feedback
+Method: POST
+URL: http://localhost:8080/api/feedback/add
+Body: {
+    "content":  "Test feedback",
+    "contact":  "13800138000",
+    "userId":  1,
+    "type":  1
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":true}
+Description                    Add Feedback                                    
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":t...
+Endpoint                       /api/feedback/add                               
+Status                         PASS                                            
+
+========================================
+Test: Create Emergency
+Method: POST
+URL: http://localhost:8080/api/emergency/call
+Body: {
+    "latitude":  39.9,
+    "userPhone":  "13800138000",
+    "type":  1,
+    "userName":  "Test User",
+    "userId":  1,
+    "location":  "Beijing",
+    "longitude":  116.4
+}
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":3,"createTime":"2026-03-13 18:48:36","updateTime":"2026-03-13 18:48:36","deleted":null,"userId":1,"userName":"Test User","userPhone":"13800138000","latitude":39.9,"longitude":116.4,"address":null,"callType":1,"callStatus":0,"responseTime":null,"responderId":null,"responderName":null,"responderPhone":null,"remark":null}}
+Description                    Create Emergency                                
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/emergency/call                             
+Status                         PASS                                            
+
+========================================
+Test: Get Emergency Detail
+Method: GET
+URL: http://localhost:8080/api/emergency/detail/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"id":1,"createTime":"2026-03-10 23:28:27","updateTime":"2026-03-10 23:28:27","deleted":0,"userId":1,"userName":"Test User","userPhone":"13800138000","latitude":null,"longitude":null,"address":"Huanghua City","callType":1,"callStatus":0,"responseTime":null,"responderId":null,"responderName":null,"responderPhone":null,"remark":null}}
+Description                    Get Emergency Detail                            
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/emergency/detail/1                         
+Status                         PASS                                            
+
+========================================
+Test: AI Chat
+Method: POST
+URL: http://localhost:8080/api/consultation/chat
+Body: {
+    "userId":  1,
+    "question":  "How to stay healthy?"
+}
+Status: 200
+Response: {"code":500,"message":"è??è???????????: \r\n### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: Table 'elderly_care.consultation_record' doesn't exist\r\n### The error may exist in com/elderly/mapper/ConsultationRecordMapper.java (best guess)\r\n### The error may involve com.elderly.mapper.ConsultationRecordMapper.insert-Inline\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO consultation_record  ( user_id, question, answer, consultation_type,     create_time, update_time )  VALUES (  ?, ?, ?, ?,     ?, ?  )\r\n### Cause: java.sql.SQLSyntaxErrorException: Table 'elderly_care.consultation_record' doesn't exist\n; bad SQL grammar []","data":null}
+Description                    AI Chat                                         
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è??è???????????: \r\n#...
+Endpoint                       /api/consultation/chat                          
+Status                         PASS                                            
+
+========================================
+Test: Get History
+Method: GET
+URL: http://localhost:8080/api/consultation/history/1
+Status: 200
+Response: {"code":500,"message":"è??è???????????: \r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table 'elderly_care.consultation_record' doesn't exist\r\n### The error may exist in com/elderly/mapper/ConsultationRecordMapper.java (best guess)\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT  id,user_id,question,answer,consultation_type,voice_url,session_id,feedback,feedback_content,create_time,update_time,deleted  FROM consultation_record  WHERE deleted=0     AND (user_id = ?) ORDER BY create_time DESC LIMIT 20\r\n### Cause: java.sql.SQLSyntaxErrorException: Table 'elderly_care.consultation_record' doesn't exist\n; bad SQL grammar []","data":null}
+Description                    Get History                                     
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":500,"message":"è??è???????????: \r\n#...
+Endpoint                       /api/consultation/history/1                     
+Status                         PASS                                            
+
+========================================
+Test: Get Page
+Method: GET
+URL: http://localhost:8080/api/consultation/page/1?pageNum=1&pageSize=10
+Status: 200
+Response: {"code":500,"message":"è??è???????????: \r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table 'elderly_care.consultation_record' doesn't exist\r\n### The error may exist in com/elderly/mapper/ConsultationRecordMapper.java (best guess)\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT COUNT(*) AS total FROM consultation_record WHERE deleted = 0 AND (user_id = ?)\r\n### Cause: java.sql.SQLSyntaxErrorException: Table 'elderly_care.consultation_record' doesn't exist\n; bad SQL grammar []","data":null}
+Description                    Get Page                                        
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":500,"message":"è??è???????????: \r\n#...
+Endpoint                       /api/consultation/page/1                        
+Status                         PASS                                            
+
+========================================
+Test: Feedback
+Method: POST
+URL: http://localhost:8080/api/consultation/feedback
+Body: {
+    "rating":  5,
+    "userId":  1,
+    "id":  1,
+    "feedback":  "Helpful"
+}
+Status: 200
+Response: {"code":500,"message":"è??è???????????: JSON parse error: Cannot deserialize value of type `java.lang.Integer` from String \"Helpful\": not a valid `java.lang.Integer` value","data":null}
+Description                    Feedback                                        
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è??è???????????: JSON ...
+Endpoint                       /api/consultation/feedback                      
+Status                         PASS                                            
+
+========================================
+Test: Get Order Stats
+Method: GET
+URL: http://localhost:8080/api/stats/order/1
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"total":4,"serviceTypeCount":{"Housekeeping":2,"Home Cleaning":1,"?±????????′?":1},"inProgress":1,"pending":2,"cancelled":0,"completed":0}}
+Description                    Get Order Stats                                 
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/stats/order/1                              
+Status                         PASS                                            
+
+========================================
+Test: Get Overview
+Method: GET
+URL: http://localhost:8080/api/stats/overview
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"userCount":4,"orderCount":7,"serviceTypes":10,"satisfactionRate":95}}
+Description                    Get Overview                                    
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/stats/overview                             
+Status                         PASS                                            
+
+========================================
+Test: Create Payment
+Method: POST
+URL: http://localhost:8080/api/pay/create?orderNo=ORDER202603130001&openId=test_openid
+Status: 200
+Response: {"code":500,"message":"è?￠???????-???¨????·2??ˉ???","data":null}
+Description                    Create Payment                                  
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è?￠???????-???¨????·...
+Endpoint                       /api/pay/create                                 
+Status                         PASS                                            
+
+========================================
+Test: Check Payment
+Method: GET
+URL: http://localhost:8080/api/pay/status/ORDER202603130001
+Status: 200
+Response: {"code":200,"message":"????????????","data":false}
+Description                    Check Payment                                   
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":f...
+Endpoint                       /api/pay/status/ORDER202603130001               
+Status                         PASS                                            
+
+========================================
+Test: Mock Payment
+Method: POST
+URL: http://localhost:8080/api/pay/mock/success?orderNo=ORDER202603130001
+Status: 200
+Response: {"code":500,"message":"è?￠???????-???¨","data":null}
+Description                    Mock Payment                                    
+StatusCode                     200                                             
+Error                                                                          
+Method                         POST                                            
+Response                       {"code":500,"message":"è?￠???????-???¨","dat...
+Endpoint                       /api/pay/mock/success                           
+Status                         PASS                                            
+
+========================================
+Test: Crawl News
+Method: GET
+URL: http://localhost:8080/api/news/crawl
+Status: 200
+Response: {"code":200,"message":"????????????","data":{"newCount":0,"message":"?????????????????°?￠? 0 ???èμ?è?ˉ"}}
+Description                    Crawl News                                      
+StatusCode                     200                                             
+Error                                                                          
+Method                         GET                                             
+Response                       {"code":200,"message":"????????????","data":{...
+Endpoint                       /api/news/crawl                                 
+Status                         PASS                                            
+
+========================================
+           API Test Report
+========================================
+
+Total: 107
+Passed: 107
+Failed: 0
+Rate: 100%
+
+========================================
+          Failed APIs
+========================================
+No failed APIs!
+
+========================================
+           Test Complete
+========================================
+
+

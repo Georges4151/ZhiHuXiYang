@@ -1,0 +1,114 @@
+<view class="container">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="header-title">天气预报</text>
+      <text class="header-desc">实时天气，贴心守护</text>
+    </view>
+  </view>
+
+  <view class="current-weather">
+    <view class="weather-main">
+      <text class="weather-icon">{{currentWeather.icon}}</text>
+      <view class="weather-info">
+        <text class="temp">{{currentWeather.temp}}°C</text>
+        <text class="status">{{currentWeather.text}}</text>
+        <text class="city">{{currentWeather.city}}</text>
+      </view>
+    </view>
+    <view class="city-switch-btn" bindtap="refreshLocation">
+      <text class="switch-icon">📍</text>
+      <text class="switch-text">刷新位置</text>
+    </view>
+    <view class="weather-details">
+      <view class="detail-item">
+        <text class="detail-icon">💧</text>
+        <text class="detail-label">湿度</text>
+        <text class="detail-value">{{currentWeather.humidity}}%</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-icon">🌬️</text>
+        <text class="detail-label">风力</text>
+        <text class="detail-value">{{currentWeather.windDir}} {{currentWeather.windScale}}级</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-icon">🌡️</text>
+        <text class="detail-label">体感</text>
+        <text class="detail-value">{{currentWeather.feelsLike}}°C</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-icon">👁️</text>
+        <text class="detail-label">能见度</text>
+        <text class="detail-value">{{currentWeather.visibility}}km</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="forecast-section" wx:if="{{forecastList.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">未来7天预报</text>
+    </view>
+    <view class="forecast-list">
+      <view class="forecast-item" wx:for="{{forecastList}}" wx:key="date">
+        <text class="forecast-date">{{item.date}}</text>
+        <text class="forecast-icon">{{item.icon}}</text>
+        <text class="forecast-status">{{item.status}}</text>
+        <view class="forecast-temp">
+          <text class="temp-high">{{item.high}}°</text>
+          <text class="temp-low">{{item.low}}°</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="tips-section" wx:if="{{lifeIndex.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">生活指数</text>
+    </view>
+    <view class="tips-grid">
+      <view class="tip-card" wx:for="{{lifeIndex}}" wx:key="id">
+        <text class="tip-icon">{{item.icon}}</text>
+        <text class="tip-name">{{item.name}}</text>
+        <text class="tip-value">{{item.value}}</text>
+        <text class="tip-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="air-section">
+    <view class="section-header">
+      <text class="section-title">空气质量</text>
+    </view>
+    <view class="air-card">
+      <view class="aqi-circle {{airQuality.level}}">
+        <text class="aqi-value">{{airQuality.aqi}}</text>
+        <text class="aqi-level">{{airQuality.category}}</text>
+      </view>
+      <view class="air-details">
+        <view class="air-item">
+          <text class="air-label">PM2.5</text>
+          <text class="air-num">{{airQuality.pm2p5}}</text>
+        </view>
+        <view class="air-item">
+          <text class="air-label">PM10</text>
+          <text class="air-num">{{airQuality.pm10}}</text>
+        </view>
+        <view class="air-item">
+          <text class="air-label">O₃</text>
+          <text class="air-num">{{airQuality.o3}}</text>
+        </view>
+        <view class="air-item">
+          <text class="air-label">NO₂</text>
+          <text class="air-num">{{airQuality.no2}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-content">
+      <text class="loading-icon">🔄</text>
+      <text class="loading-text">加载中...</text>
+    </view>
+  </view>
+</view>

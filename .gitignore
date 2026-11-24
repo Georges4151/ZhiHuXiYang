@@ -1,0 +1,28 @@
+# 构建产物
+target/
+**/target/
+node_modules/
+dist/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# 本地配置（含真实密钥，不提交）
+application-local.yml
+**/application-local.yml
+
+# 日志与临时文件
+*.log
+logs/
+backend_start.log
+
+# 运行时上传目录
+upload/
+
+# 系统与压缩包
+.DS_Store
+Thumbs.db
+*.zip
+*.rar

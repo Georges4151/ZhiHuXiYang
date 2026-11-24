@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="header-title">新闻中心</text>
+      <text class="header-desc">了解最新养老新闻</text>
+    </view>
+  </view>
+
+  <view class="category-tabs">
+    <view class="tab-item {{currentCategory === item.id ? 'active' : ''}}" 
+          wx:for="{{categoryList}}" wx:key="id"
+          bindtap="onCategoryChange" data-id="{{item.id}}">
+      {{item.name}}
+    </view>
+  </view>
+
+  <view class="news-list">
+    <view class="news-item" wx:for="{{newsList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="news-content">
+        <view class="news-header">
+          <text class="news-title">{{item.title}}</text>
+          <view class="top-tag" wx:if="{{item.isTop}}">置顶</view>
+        </view>
+        <text class="news-summary">{{item.summary}}</text>
+        <view class="news-footer">
+          <view class="news-meta">
+            <view class="category-badge" style="background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);">
+              <text class="category-text">{{item.categoryName}}</text>
+            </view>
+            <text class="news-time">{{item.createTime}}</text>
+          </view>
+          <view class="news-views">
+            <view class="eye-icon-wrap">
+              <text class="eye-icon-text">阅</text>
+            </view>
+            <text>{{item.readCount}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+
+  <view class="no-more" wx:if="{{!hasMore && newsList.length > 0}}">
+    <text>— 没有更多了 —</text>
+  </view>
+
+  <view class="empty" wx:if="{{newsList.length === 0 && !loading}}">
+    <view class="empty-icon-wrap">
+      <text class="empty-icon-text">空</text>
+    </view>
+    <text class="empty-text">暂无新闻</text>
+  </view>
+</view>

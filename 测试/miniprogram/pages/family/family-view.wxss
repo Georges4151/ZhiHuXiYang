@@ -1,0 +1,368 @@
+.family-view-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+/* 头部用户信息 */
+.header {
+  background: linear-gradient(135deg, #1890ff, #36cfc9);
+  padding: 30rpx 0;
+}
+
+.user-scroll {
+  white-space: nowrap;
+}
+
+.user-list {
+  display: inline-flex;
+  padding: 0 20rpx;
+}
+
+.user-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  margin-right: 20rpx;
+  border-radius: 16rpx;
+  background: rgba(255,255,255,0.2);
+  min-width: 140rpx;
+}
+
+.user-item.active {
+  background: rgba(255,255,255,0.9);
+}
+
+.user-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+  margin-bottom: 10rpx;
+}
+
+.user-name {
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: bold;
+}
+
+.user-item.active .user-name {
+  color: #333;
+}
+
+.user-relation {
+  font-size: 24rpx;
+  color: rgba(255,255,255,0.8);
+  margin-top: 6rpx;
+}
+
+.user-item.active .user-relation {
+  color: #666;
+}
+
+.empty-users {
+  text-align: center;
+  padding: 40rpx;
+  color: #fff;
+  font-size: 32rpx;
+}
+
+/* 标签切换 */
+.tab-bar {
+  display: flex;
+  background: #fff;
+  border-bottom: 1rpx solid #eee;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 32rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #1890ff;
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 4rpx;
+  background: #1890ff;
+  border-radius: 2rpx;
+}
+
+.badge {
+  display: inline-block;
+  background: #ff4d4f;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 20rpx;
+  margin-left: 10rpx;
+}
+
+/* 内容区域 */
+.content {
+  padding: 20rpx;
+}
+
+/* 健康数据 */
+.health-summary {
+  display: flex;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.summary-item {
+  flex: 1;
+  text-align: center;
+}
+
+.summary-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1890ff;
+  display: block;
+}
+
+.summary-value.warning {
+  color: #ff4d4f;
+}
+
+.summary-value.normal {
+  color: #52c41a;
+}
+
+.summary-label {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 10rpx;
+  display: block;
+}
+
+.health-list {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.health-item {
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.health-item:last-child {
+  border-bottom: none;
+}
+
+.health-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.health-type {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.health-time {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.health-value {
+  font-size: 36rpx;
+  color: #1890ff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.health-value.abnormal {
+  color: #ff4d4f;
+}
+
+.abnormal-tag {
+  font-size: 24rpx;
+  background: #ff4d4f;
+  color: #fff;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+}
+
+.health-remark {
+  font-size: 28rpx;
+  color: #666;
+  margin-top: 10rpx;
+  display: block;
+}
+
+/* 服务订单 */
+.order-list {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.order-item {
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15rpx;
+}
+
+.order-no {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.order-status {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.order-body {
+  margin-bottom: 15rpx;
+}
+
+.service-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.service-time, .service-address {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 6rpx;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-amount {
+  font-size: 36rpx;
+  color: #ff4d4f;
+  font-weight: bold;
+}
+
+.order-time {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 消息通知 */
+.notification-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20rpx;
+}
+
+.mark-all {
+  font-size: 28rpx;
+  color: #1890ff;
+}
+
+.notification-list {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.notification-item {
+  display: flex;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  position: relative;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item.unread {
+  background: #f0f8ff;
+}
+
+.notification-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background: #f0f8ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  font-size: 40rpx;
+}
+
+.notification-body {
+  flex: 1;
+}
+
+.notification-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.notification-content {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.notification-time {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.unread-dot {
+  width: 16rpx;
+  height: 16rpx;
+  background: #ff4d4f;
+  border-radius: 50%;
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 100rpx 40rpx;
+  color: #999;
+  font-size: 32rpx;
+}

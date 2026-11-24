@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="article-header">
+    <text class="article-title">{{article.title}}</text>
+    <view class="article-meta">
+      <text class="meta-category">{{article.categoryName}}</text>
+      <text class="meta-time">{{article.createTime}}</text>
+      <text class="meta-views">阅读 {{article.viewCount}}</text>
+    </view>
+  </view>
+
+  <view class="article-content">
+    <text class="content-text">{{article.content}}</text>
+  </view>
+
+  <view class="related-section" wx:if="{{relatedNews.length > 0}}">
+    <view class="section-title">相关推荐</view>
+    <view class="related-list">
+      <view class="related-item" wx:for="{{relatedNews}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+        <text class="related-title">{{item.title}}</text>
+        <text class="related-time">{{item.createTime}}</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="setting-section">
+    <view class="setting-item">
+      <view class="setting-left">
+        <text class="setting-label">允许获取位置信息</text>
+        <text class="setting-desc">用于获取天气、附近服务等</text>
+      </view>
+      <switch checked="{{locationEnabled}}" bindchange="toggleLocation" color="#4A90D9" />
+    </view>
+    
+    <view class="setting-item">
+      <view class="setting-left">
+        <text class="setting-label">允许消息通知</text>
+        <text class="setting-desc">接收服务提醒、健康提醒等</text>
+      </view>
+      <switch checked="{{notificationEnabled}}" bindchange="toggleNotification" color="#4A90D9" />
+    </view>
+    
+    <view class="setting-item">
+      <view class="setting-left">
+        <text class="setting-label">允许数据统计</text>
+        <text class="setting-desc">帮助我们改进服务质量</text>
+      </view>
+      <switch checked="{{statsEnabled}}" bindchange="toggleStats" color="#4A90D9" />
+    </view>
+  </view>
+
+  <view class="info-section">
+    <view class="info-item" bindtap="showPrivacyPolicy">
+      <text class="info-label">隐私政策</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="info-item" bindtap="showUserAgreement">
+      <text class="info-label">用户协议</text>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <view class="tip-section">
+    <text class="tip-text">您的隐私对我们很重要，我们承诺保护您的个人信息安全。</text>
+  </view>
+</view>

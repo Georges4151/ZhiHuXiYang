@@ -1,0 +1,124 @@
+<view class="container">
+  <!-- 头部区域 -->
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="header-title">家属管理</text>
+      <text class="header-desc">紧急联系人列表</text>
+    </view>
+    <!-- 统计信息 -->
+    <view class="header-stats" wx:if="{{familyList.length > 0}}">
+      <view class="stat-item">
+        <text class="stat-number">{{familyList.length}}</text>
+        <text class="stat-label">位家属</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 家属列表 -->
+  <view class="family-list" wx:if="{{familyList.length > 0}}">
+    <view class="family-item" wx:for="{{familyList}}" wx:key="id">
+      <view class="family-avatar">
+        <text>{{item.relation === '配偶' ? '💑' : (item.relation === '儿子' ? '👦' : (item.relation === '女儿' ? '👧' : (item.relation === '父亲' ? '👨' : (item.relation === '母亲' ? '👩' : '👤'))))}}</text>
+      </view>
+      <view class="family-info">
+        <text class="family-name">{{item.name}}</text>
+        <text class="family-relation">{{item.relation}}</text>
+        <text class="family-phone">{{item.phone}}</text>
+      </view>
+      <view class="family-actions">
+        <view class="action-btn call" bindtap="callFamily" data-phone="{{item.phone}}">
+          <text class="btn-icon">📞</text>
+          <text class="btn-text">呼叫</text>
+        </view>
+        <view class="action-btn delete" bindtap="deleteFamily" data-id="{{item.id}}">
+          <text class="btn-icon">🗑️</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-family" wx:if="{{familyList.length === 0}}">
+    <view class="empty-icon-wrapper">
+      <text class="empty-icon">👨‍👩‍👧‍👦</text>
+    </view>
+    <text class="empty-text">暂无家属联系人</text>
+    <text class="empty-tip">添加家属后，可在紧急情况下快速联系</text>
+  </view>
+
+  <!-- 添加按钮 -->
+  <view class="add-section">
+    <button class="add-btn" bindtap="showAddModal">
+      <view class="add-icon-wrapper">
+        <text class="add-icon">+</text>
+      </view>
+      <text>添加家属</text>
+    </button>
+  </view>
+
+  <!-- 提示区域 -->
+  <view class="tips-section">
+    <view class="tips-header">
+      <view class="tips-icon">💡</view>
+      <text class="tips-title">温馨提示</text>
+    </view>
+    <view class="tips-content">
+      <view class="tip-item">
+        <view class="tip-dot"></view>
+        <text class="tip-text">建议添加2-3位紧急联系人，确保紧急情况下能够及时联系到家属</text>
+      </view>
+      <view class="tip-item">
+        <view class="tip-dot"></view>
+        <text class="tip-text">点击呼叫按钮可直接拨打电话，无需手动输入号码</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 添加家属弹窗 -->
+  <view class="modal-mask" wx:if="{{showAddModal}}" catchtap="hideModal">
+    <view class="modal-content" catchtap="onModalContentTap">
+      <!-- 弹窗头部 -->
+      <view class="modal-header">
+        <view class="modal-title-wrapper">
+          <view class="modal-title-icon">👨‍👩‍👧</view>
+          <text class="modal-title">添加家属</text>
+        </view>
+        <view class="modal-close" bindtap="hideModal">✕</view>
+      </view>
+      
+      <view class="modal-body">
+        <!-- 手动添加表单 -->
+        <view class="manual-section">
+          <view class="form-item">
+            <text class="form-label required">姓名</text>
+            <view class="form-input-wrapper">
+              <input class="form-input" placeholder="请输入家属姓名" value="{{formData.name}}" bindinput="onNameInput" />
+            </view>
+          </view>
+          <view class="form-item">
+            <text class="form-label required">手机号</text>
+            <view class="form-input-wrapper">
+              <input class="form-input" type="number" maxlength="11" placeholder="请输入11位手机号" value="{{formData.phone}}" bindinput="onPhoneInput" />
+            </view>
+          </view>
+          <view class="form-item">
+            <text class="form-label required">关系</text>
+            <picker mode="selector" range="{{relationOptions}}" value="{{relationIndex}}" bindchange="onRelationChange">
+              <view class="form-picker">
+                <text class="{{formData.relation ? 'selected' : 'placeholder'}}">{{formData.relation || '请选择与家属的关系'}}</text>
+                <view class="picker-arrow">▼</view>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 弹窗底部按钮 -->
+      <view class="modal-footer">
+        <button class="btn-cancel" bindtap="hideModal">取消</button>
+        <button class="btn-confirm" bindtap="submitFamily">确认添加</button>
+      </view>
+    </view>
+  </view>
+</view>

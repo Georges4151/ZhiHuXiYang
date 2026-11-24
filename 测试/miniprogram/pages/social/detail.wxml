@@ -1,0 +1,99 @@
+<view class="detail-container">
+  <!-- 动态详情 -->
+  <view class="post-detail" wx:if="{{post.id}}">
+    <!-- 用户信息 -->
+    <view class="user-info">
+      <image class="avatar" src="{{post.userAvatar || '/images/icon/user.png'}}" mode="aspectFill"/>
+      <view class="user-meta">
+        <text class="user-name">{{post.userName || '匿名用户'}}</text>
+        <text class="post-time">{{post.createdAt}}</text>
+      </view>
+    </view>
+
+    <!-- 分类标签 -->
+    <view class="category-tag" wx:if="{{post.category}}">
+      {{post.categoryName}}
+    </view>
+
+    <!-- 动态内容 -->
+    <view class="post-content">
+      <text class="content-text">{{post.content}}</text>
+      <view class="image-list" wx:if="{{post.images}}">
+        <image 
+          wx:for="{{post.images.split(',')}}" 
+          wx:for-item="img"
+          wx:key="*this"
+          class="post-image {{post.images.split(',').length === 1 ? 'single' : ''}}"
+          src="{{img}}"
+          mode="aspectFill"
+          data-urls="{{post.images.split(',')}}"
+          data-current="{{img}}"
+          bindtap="onImagePreview"
+        />
+      </view>
+    </view>
+
+    <!-- 互动按钮 -->
+    <view class="post-actions">
+      <view class="action-item" bindtap="onLike">
+        <text class="action-icon {{post.isLiked ? 'liked' : ''}}">{{post.isLiked ? '❤️' : '🤍'}}</text>
+        <text class="count">{{post.likes || 0}}</text>
+      </view>
+      <view class="action-item">
+        <text class="action-icon">💬</text>
+        <text class="count">{{post.comments || 0}}</text>
+      </view>
+      <button class="action-item share-btn" open-type="share">
+        <text class="action-icon">↗️</text>
+        <text class="count">分享</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 评论区域 -->
+  <view class="comments-section">
+    <view class="section-title">
+      <text class="title-text">评论</text>
+      <text class="count-badge" wx:if="{{comments.length > 0}}">{{comments.length}}</text>
+    </view>
+
+    <!-- 评论列表 -->
+    <view class="comment-list" wx:if="{{comments.length > 0}}">
+      <view class="comment-item" wx:for="{{comments}}" wx:key="id">
+        <image class="comment-avatar" src="{{item.userAvatar || '/images/icon/user.png'}}" mode="aspectFill"/>
+        <view class="comment-content">
+          <view class="comment-header">
+            <text class="comment-name">{{item.userName || '匿名用户'}}</text>
+            <text class="comment-time">{{item.createdAt}}</text>
+          </view>
+          <text class="comment-text">{{item.content}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-comments" wx:if="{{comments.length === 0}}">
+      <text class="empty-icon">💬</text>
+      <text class="empty-text">暂无评论，快来抢沙发吧！</text>
+    </view>
+  </view>
+
+  <!-- 评论输入框 -->
+  <view class="comment-input-bar">
+    <input 
+      class="comment-input" 
+      placeholder="写下您的评论..." 
+      value="{{commentContent}}"
+      bindinput="onCommentInput"
+      confirm-type="send"
+      bindconfirm="submitComment"
+    />
+    <button 
+      class="send-btn {{commentContent ? 'active' : ''}}" 
+      bindtap="submitComment"
+      disabled="{{!commentContent || submitting}}"
+    >
+      {{submitting ? '发送中...' : '发送'}}
+    </button>
+  </view>
+</view>

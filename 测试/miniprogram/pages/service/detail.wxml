@@ -1,0 +1,81 @@
+<view class="container">
+  <view class="service-header">
+    <view class="service-icon">{{service.icon}}</view>
+    <view class="service-info">
+      <text class="service-name">{{service.name}}</text>
+      <view class="service-meta">
+        <text class="service-category">{{service.category}}</text>
+        <text class="service-rating">⭐ {{service.rating}}</text>
+        <text class="service-sales">已售{{service.sales}}单</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="price-section">
+    <view class="price-row">
+      <text class="price-label">服务价格</text>
+      <view class="price-value">
+        <text class="price-unit">¥</text>
+        <text class="price-num">{{service.price}}</text>
+        <text class="price-unit">/次</text>
+      </view>
+    </view>
+    <view class="duration-row">
+      <text class="duration-label">服务时长</text>
+      <text class="duration-value">约{{service.duration}}分钟</text>
+    </view>
+  </view>
+
+  <view class="detail-section">
+    <view class="section-title">服务介绍</view>
+    <text class="section-content">{{service.description}}</text>
+  </view>
+
+  <view class="detail-section">
+    <view class="section-title">服务内容</view>
+    <view class="service-items">
+      <view class="service-item" wx:for="{{serviceFeatures}}" wx:key="*this">
+        <text class="item-icon">✓</text>
+        <text class="item-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="detail-section">
+    <view class="section-title">服务须知</view>
+    <view class="notice-list">
+      <text class="notice-item">1. 请提前1天预约，方便安排服务人员</text>
+      <text class="notice-item">2. 服务时间：每日 8:00-18:00</text>
+      <text class="notice-item">3. 如需取消，请提前2小时联系客服</text>
+      <text class="notice-item">4. 服务完成后请确认验收</text>
+    </view>
+  </view>
+
+  <view class="detail-section">
+    <view class="section-title">用户评价</view>
+    <view class="review-summary">
+      <text class="review-score">{{service.rating}}</text>
+      <text class="review-desc">非常满意</text>
+    </view>
+    <view class="review-list">
+      <view class="review-item" wx:for="{{reviews}}" wx:key="id">
+        <view class="review-header">
+          <text class="review-user">{{item.user}}</text>
+          <text class="review-time">{{item.time}}</text>
+        </view>
+        <view class="review-stars">
+          <text wx:for="{{item.stars}}" wx:key="*this">⭐</text>
+        </view>
+        <text class="review-content">{{item.content}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="contact-btn" bindtap="makePhoneCall">
+      <text class="contact-icon">📞</text>
+      <text class="contact-text">电话咨询</text>
+    </view>
+    <button class="order-btn" bindtap="goToOrder">立即预约</button>
+  </view>
+</view>

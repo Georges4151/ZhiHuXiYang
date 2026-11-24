@@ -1,0 +1,246 @@
+<view class="container">
+  <view class="tabs">
+    <view class="tab-item {{activeTab === item.id ? 'active' : ''}}" 
+          wx:for="{{tabs}}" wx:key="id" 
+          data-id="{{item.id}}" 
+          bindtap="onTabChange">
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+
+  <view class="content" wx:if="{{!loading}}">
+    
+    <!-- 健康数据统计 -->
+    <view class="panel" wx:if="{{activeTab === 'health'}}">
+      <view class="panel-header">
+        <text class="panel-title">📊 健康趋势分析</text>
+        <text class="panel-subtitle">近7天数据变化</text>
+      </view>
+      
+      <view class="chart-section">
+        <view class="chart-title">血压趋势 (mmHg)</view>
+        <view class="chart-container">
+          <view class="chart-y-axis">
+            <text wx:for="{{[180, 150, 120, 90, 60]}}" wx:key="*this">{{item}}</text>
+          </view>
+          <view class="chart-area">
+            <view class="chart-bars">
+              <view class="bar-group" wx:for="{{healthData.labels}}" wx:key="*this">
+                <view class="bar-wrap">
+                  <view class="bar bar-high" style="height: {{healthData.bloodPressureHigh[index] * 1.2}}rpx;"></view>
+                  <view class="bar bar-low" style="height: {{healthData.bloodPressureLow[index] * 1.5}}rpx;"></view>
+                </view>
+                <text class="bar-label">{{item}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="chart-legend">
+          <view class="legend-item">
+            <view class="legend-color high"></view>
+            <text>收缩压</text>
+          </view>
+          <view class="legend-item">
+            <view class="legend-color low"></view>
+            <text>舒张压</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="chart-section">
+        <view class="chart-title">心率趋势 (次/分钟)</view>
+        <view class="chart-container">
+          <view class="chart-y-axis">
+            <text wx:for="{{[120, 100, 80, 60, 40]}}" wx:key="*this">{{item}}</text>
+          </view>
+          <view class="chart-area">
+            <view class="line-chart">
+              <view class="line-point" wx:for="{{healthData.heartRate}}" wx:key="index" 
+                    style="bottom: {{(item - 40) * 2}}rpx; left: {{index * 100}}rpx;">
+                <view class="point"></view>
+                <text class="point-value">{{item}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="chart-section">
+        <view class="chart-title">血糖趋势 (mmol/L)</view>
+        <view class="chart-container">
+          <view class="chart-y-axis">
+            <text wx:for="{{[10, 8, 6, 4, 2]}}" wx:key="*this">{{item}}</text>
+          </view>
+          <view class="chart-area">
+            <view class="line-chart sugar">
+              <view class="line-point" wx:for="{{healthData.bloodSugar}}" wx:key="index" 
+                    style="bottom: {{item * 30}}rpx; left: {{index * 100}}rpx;">
+                <view class="point sugar-point"></view>
+                <text class="point-value">{{item}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="health-summary">
+        <view class="summary-title">健康评估</view>
+        <view class="summary-items">
+          <view class="summary-item">
+            <text class="summary-label">血压状态</text>
+            <text class="summary-value normal">正常范围</text>
+          </view>
+          <view class="summary-item">
+            <text class="summary-label">心率状态</text>
+            <text class="summary-value normal">正常范围</text>
+          </view>
+          <view class="summary-item">
+            <text class="summary-label">血糖状态</text>
+            <text class="summary-value warning">偏高</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 订单统计 -->
+    <view class="panel" wx:if="{{activeTab === 'order'}}">
+      <view class="panel-header">
+        <text class="panel-title">📋 订单统计</text>
+        <text class="panel-subtitle">服务订单数据分析</text>
+      </view>
+
+      <view class="stats-cards">
+        <view class="stat-card">
+          <text class="stat-value">{{orderStats.total}}</text>
+          <text class="stat-label">总订单</text>
+        </view>
+        <view class="stat-card pending">
+          <text class="stat-value">{{orderStats.pending}}</text>
+          <text class="stat-label">待支付</text>
+        </view>
+        <view class="stat-card processing">
+          <text class="stat-value">{{orderStats.processing}}</text>
+          <text class="stat-label">进行中</text>
+        </view>
+        <view class="stat-card completed">
+          <text class="stat-value">{{orderStats.completed}}</text>
+          <text class="stat-label">已完成</text>
+        </view>
+      </view>
+
+      <view class="chart-section">
+        <view class="chart-title">服务类型分布</view>
+        <view class="pie-chart">
+          <view class="pie-visual">
+            <view class="pie-item" wx:for="{{orderStats.categoryStats}}" wx:key="name" 
+                  style="--color: {{item.color || '#4A90D9'}}; --value: {{item.value}}; --index: {{index}};">
+            </view>
+          </view>
+          <view class="pie-legend">
+            <view class="pie-legend-item" wx:for="{{orderStats.categoryStats}}" wx:key="name">
+              <view class="pie-legend-color" style="background: {{item.color || '#4A90D9'}};"></view>
+              <text class="pie-legend-name">{{item.name}}</text>
+              <text class="pie-legend-value">{{item.value}}单</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="order-trend">
+        <view class="chart-title">月度订单趋势</view>
+        <view class="trend-bars">
+          <view class="trend-bar" wx:for="{{[65, 78, 92, 85, 110, 95, 120]}}" wx:key="index">
+            <view class="trend-fill" style="height: {{item}}%;"></view>
+            <text class="trend-label">{{index + 1}}月</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 系统概览 -->
+    <view class="panel" wx:if="{{activeTab === 'overview'}}">
+      <view class="panel-header">
+        <text class="panel-title">📈 系统概览</text>
+        <text class="panel-subtitle">平台运营数据</text>
+      </view>
+
+      <view class="overview-cards">
+        <view class="overview-card">
+          <view class="overview-icon">👥</view>
+          <view class="overview-info">
+            <text class="overview-value">{{overviewStats.totalUsers}}</text>
+            <text class="overview-label">注册用户</text>
+          </view>
+        </view>
+        <view class="overview-card">
+          <view class="overview-icon">📋</view>
+          <view class="overview-info">
+            <text class="overview-value">{{overviewStats.totalOrders}}</text>
+            <text class="overview-label">累计订单</text>
+          </view>
+        </view>
+        <view class="overview-card">
+          <view class="overview-icon">🛠️</view>
+          <view class="overview-info">
+            <text class="overview-value">{{overviewStats.totalServices}}</text>
+            <text class="overview-label">服务项目</text>
+          </view>
+        </view>
+        <view class="overview-card">
+          <view class="overview-icon">⭐</view>
+          <view class="overview-info">
+            <text class="overview-value">{{overviewStats.avgRating}}</text>
+            <text class="overview-label">平均评分</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="feature-stats">
+        <view class="chart-title">功能使用统计</view>
+        <view class="feature-list">
+          <view class="feature-item">
+            <view class="feature-info">
+              <text class="feature-name">智能咨询</text>
+              <text class="feature-count">1,256次</text>
+            </view>
+            <view class="feature-bar">
+              <view class="feature-fill" style="width: 85%;"></view>
+            </view>
+          </view>
+          <view class="feature-item">
+            <view class="feature-info">
+              <text class="feature-name">健康监测</text>
+              <text class="feature-count">892次</text>
+            </view>
+            <view class="feature-bar">
+              <view class="feature-fill" style="width: 65%;"></view>
+            </view>
+          </view>
+          <view class="feature-item">
+            <view class="feature-info">
+              <text class="feature-name">服务预约</text>
+              <text class="feature-count">756次</text>
+            </view>
+            <view class="feature-bar">
+              <view class="feature-fill" style="width: 55%;"></view>
+            </view>
+          </view>
+          <view class="feature-item">
+            <view class="feature-info">
+              <text class="feature-name">紧急呼叫</text>
+              <text class="feature-count">23次</text>
+            </view>
+            <view class="feature-bar">
+              <view class="feature-fill" style="width: 15%;"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>

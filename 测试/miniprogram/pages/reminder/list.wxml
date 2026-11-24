@@ -1,0 +1,163 @@
+<view class="container">
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="header-title">用药提醒</text>
+      <text class="header-desc">按时服药，健康生活</text>
+    </view>
+  </view>
+
+  <view class="add-btn" bindtap="showAddModal">
+    <text class="add-icon">+</text>
+    <text>添加用药提醒</text>
+  </view>
+
+  <view class="stats-card" wx:if="{{todayRecords.length > 0}}">
+    <view class="stats-header">
+      <view class="stats-title-wrap">
+        <view class="stats-icon-wrap">
+          <text class="stats-icon-text">记</text>
+        </view>
+        <text class="stats-title">今日服药记录</text>
+      </view>
+      <text class="stats-count">已服药 {{todayRecords.length}} 次</text>
+    </view>
+    <view class="records-list">
+      <view class="record-item" wx:for="{{todayRecords}}" wx:key="takeTime">
+        <view class="record-icon" style="background: linear-gradient(135deg, #67C23A 0%, #4A9F29 100%);">
+          <text class="record-icon-text">✓</text>
+        </view>
+        <view class="record-info">
+          <text class="record-name">{{item.medicationName}}</text>
+          <text class="record-time">{{item.takeTime}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="reminder-list" wx:if="{{reminderList.length > 0}}">
+    <view class="reminder-item {{item.status === 1 ? 'active' : 'inactive'}}" wx:for="{{reminderList}}" wx:key="id">
+      <view class="reminder-header">
+        <view class="med-icon" style="background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);">
+          <text class="med-icon-text">药</text>
+        </view>
+        <view class="med-info">
+          <text class="med-name">{{item.medicationName}}</text>
+          <text class="med-dosage">{{item.dosage}}</text>
+        </view>
+        <view class="status-tag {{item.status === 1 ? 'active' : 'inactive'}}" bindtap="toggleStatus" data-id="{{item.id}}" data-status="{{item.status}}">
+          {{item.status === 1 ? '已启用' : '已停用'}}
+        </view>
+      </view>
+      
+      <view class="reminder-body">
+        <view class="info-row">
+          <text class="info-label">服用频率</text>
+          <text class="info-value">{{item.frequency}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">提醒时间</text>
+          <text class="info-value time">{{item.reminderTime ? item.reminderTime.substring(0, 5) : ''}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">用药周期</text>
+          <text class="info-value">{{item.startDate}} 至 {{item.endDate}}</text>
+        </view>
+        <view class="info-row" wx:if="{{item.remark}}">
+          <text class="info-label">备注</text>
+          <text class="info-value">{{item.remark}}</text>
+        </view>
+      </view>
+
+      <view class="reminder-actions">
+        <view class="action-btn edit" bindtap="editReminder" data-item="{{item}}">
+          <view class="action-icon-wrap" style="background: linear-gradient(135deg, #E6A23C 0%, #D48806 100%);">
+            <text class="action-icon-text">改</text>
+          </view>
+          <text>编辑</text>
+        </view>
+        <view class="action-btn delete" bindtap="deleteReminder" data-id="{{item.id}}">
+          <view class="action-icon-wrap" style="background: linear-gradient(135deg, #F56C6C 0%, #E64545 100%);">
+            <text class="action-icon-text">删</text>
+          </view>
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{reminderList.length === 0 && !loading}}">
+    <view class="empty-icon-wrap">
+      <text class="empty-icon-text">药</text>
+    </view>
+    <text class="empty-text">暂无用药提醒</text>
+    <text class="empty-desc">点击上方按钮添加提醒</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showAddModal}}" bindtap="hideModal"></view>
+<view class="modal-content" wx:if="{{showAddModal}}">
+  <view class="modal-header">
+    <text class="modal-title">{{editMode ? '编辑用药提醒' : '添加用药提醒'}}</text>
+    <text class="modal-close" bindtap="hideModal">×</text>
+  </view>
+  <view class="modal-body">
+    <view class="form-item">
+      <text class="form-label">药品名称 *</text>
+      <input class="form-input" placeholder="请输入药品名称" value="{{form.medicationName}}" data-field="medicationName" bindinput="onInputChange" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">用药剂量 *</text>
+      <input class="form-input" placeholder="如：每次1片" value="{{form.dosage}}" data-field="dosage" bindinput="onInputChange" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">服用频率</text>
+      <picker mode="selector" range="{{frequencyOptions}}" value="{{frequencyIndex}}" bindchange="onFrequencyChange">
+        <view class="form-picker">
+          <text>{{form.frequency}}</text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">提醒时间</text>
+      <picker mode="time" value="{{form.reminderTime}}" bindchange="onTimeChange">
+        <view class="form-picker">
+          <text>{{form.reminderTime}}</text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">开始日期</text>
+      <picker mode="date" value="{{form.startDate}}" bindchange="onStartDateChange">
+        <view class="form-picker">
+          <text>{{form.startDate}}</text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">结束日期</text>
+      <picker mode="date" value="{{form.endDate}}" bindchange="onEndDateChange">
+        <view class="form-picker">
+          <text>{{form.endDate}}</text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">备注</text>
+      <textarea class="form-textarea" placeholder="请输入备注信息" value="{{form.remark}}" data-field="remark" bindinput="onInputChange" />
+    </view>
+  </view>
+  <view class="modal-footer">
+    <button class="cancel-btn" bindtap="hideModal">取消</button>
+    <button class="save-btn" bindtap="submitForm">{{editMode ? '保存' : '添加'}}</button>
+  </view>
+</view>

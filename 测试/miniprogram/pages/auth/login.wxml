@@ -1,0 +1,57 @@
+<view class="container">
+  <view class="header">
+    <view class="logo">
+      <text class="logo-icon">👴</text>
+    </view>
+    <text class="title">智慧养老</text>
+    <text class="subtitle">贴心服务，温暖相伴</text>
+  </view>
+
+  <view class="form-section">
+    <view class="form-item">
+      <view class="input-wrap">
+        <text class="input-icon">📱</text>
+        <input 
+          class="input" 
+          type="number" 
+          maxlength="11"
+          placeholder="请输入手机号" 
+          value="{{phone}}"
+          bindinput="onPhoneInput"
+        />
+      </view>
+    </view>
+
+    <view class="form-item">
+      <view class="input-wrap">
+        <text class="input-icon">🔐</text>
+        <input 
+          class="input" 
+          password="{{!showPassword}}"
+          placeholder="请输入密码" 
+          value="{{password}}"
+          bindinput="onPasswordInput"
+        />
+        <view class="eye-btn" bindtap="togglePassword">
+          <text class="eye-icon">{{showPassword ? '👁️' : '🙈'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <button class="login-btn" bindtap="handleLogin" loading="{{loading}}">
+      登录
+    </button>
+
+    <view class="register-link">
+      <text>还没有账号？</text>
+      <text class="link" bindtap="goToRegister">立即注册</text>
+    </view>
+  </view>
+
+  <view class="agreement">
+    <text>登录即表示同意</text>
+    <text class="link" bindtap="onAgreement">《用户协议》</text>
+    <text>和</text>
+    <text class="link" bindtap="onPrivacy">《隐私政策》</text>
+  </view>
+</view>
